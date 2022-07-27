@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Tenant Journal</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Login-->
+    <string name="username_email">Username/Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="enter_your_password">Enter your password</string>
+
+    <!--Sign Up-->
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+
+    <!--Home-->
+    <string name="add_new_tenant">Add New Tenant</string>
+    <string name="view_tenant_information">View Tenant Information</string>
+    <string name="add_a_tenant_payment">Add a Tenant\'s Payment</string>
+    <string name="monthly_payment_for">Monthly Payment for</string>
+    <string name="tenant_name">Tenant Name</string>
+    <string name="date">Date</string>
+    <string name="rent_paid">Rent Paid</string>
+
+    <!--Add a New Tenant-->
+    <string name="add_a_new_tenant">Add a New Tenant</string>
+    <string name="tenant_id_number">Tenant ID Number</string>
+    <string name="tenant_full_name">Tenant Full Name</string>
+    <string name="move_in">Move In</string>
+    <string name="move_out">Move Out</string>
+    <string name="profession">Profession</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="deposit_paid">Deposit Paid</string>
+    <string name="lease_agreement_signed">Lease Agreement Signed</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save">Save</string>
+
+    <!--Tenant's Payment-->
+    <string name="tenant_payment">Tenant\'s Payment</string>
+    <string name="property_name">Property Name</string>
+    <string name="payment_date">Payment Date</string>
+    <string name="rental_fee_paid">Rental Fee Paid</string>
+    <string name="damage_payment">Damage Payment</string>
+
+    <!--Tenant's Information-->
+    <string name="tenant_information">Tenant Information</string>
+    <string name="view">View</string>
+
+    <!--Tenants Details-->
+    <string name="tenant_details">Tenant Details</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="payment_summary">Payment Summary</string>
+    <string name="total_rental_fee_paid">Total Rental Fee Paid</string>
+    <string name="deposit_included">Deposit Included</string>
+    <string name="remaining_rental_fee">Remaining Rental Fee</string>
+    <string name="remaining_damage_payment">Remaining Damage Payment</string>
+    <string name="outstanding_balance">Outstanding Balance</string>
+    <string name="edit">Edit</string>
+</resources>

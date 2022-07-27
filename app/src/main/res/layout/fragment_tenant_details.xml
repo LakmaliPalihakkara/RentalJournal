@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TenantDetailsFragment"
+    android:background="@color/colorPrimary">
+
+    <Button
+        android:id="@+id/bt_payment_summary_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="X"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/black_round_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></Button>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="35dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tenant_payment"
+        android:textColor="@color/colorBlack"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_personal_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/personal_info"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <Button
+        android:id="@+id/bt_payment_save"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/edit"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/black_round_btn"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintRight_toRightOf="parent"></Button>
+
+    <TextView
+        android:id="@+id/tv_tenant_id_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tenant_id_number"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_personal_info"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_tenant_full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tenant_full_name"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tenant_id_number"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_occupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/occupation"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tenant_full_name"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_occupation"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_move_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/move_in"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone_number"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_move_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/move_out"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_move_in"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_payment_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_summary"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_move_out"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <Button
+        android:id="@+id/bt_payment_summary_edit"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/edit"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/black_round_btn"
+        app:layout_constraintTop_toBottomOf="@+id/tv_move_out"
+        app:layout_constraintRight_toRightOf="parent"></Button>
+
+    <TextView
+        android:id="@+id/tv_total_rental_fee_paid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_rental_fee_paid"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_payment_summary"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_deposit_included"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deposit_included"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_rental_fee_paid"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_remaining_rental_fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remaining_rental_fee"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_deposit_included"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_remaining_damage_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remaining_damage_payment"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_remaining_rental_fee"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/tv_outstanding_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/outstanding_balance"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_remaining_damage_payment"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

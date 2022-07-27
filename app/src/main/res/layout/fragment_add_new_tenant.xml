@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddNewTenantFragment">
+
+        <Button
+            android:id="@+id/bt_payment_summary_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="X"
+            android:textAllCaps="false"
+            android:textSize="25dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/black_round_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></Button>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_tenant"
+            android:layout_margin="35dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+
+    <TextView
+        android:id="@+id/tv_passport_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tenant_id_number"
+        android:layout_margin="35dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <EditText
+            android:id="@+id/et_passport_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            app:layout_constraintTop_toBottomOf="@+id/tv_passport_no"
+            app:layout_constraintLeft_toLeftOf="parent"></EditText>
+
+    <TextView
+        android:id="@+id/tv_full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tenant_full_name"
+        android:layout_margin="35dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_passport_no"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <EditText
+            android:id="@+id/et_full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            app:layout_constraintTop_toBottomOf="@+id/tv_full_name"
+            app:layout_constraintLeft_toLeftOf="parent"></EditText>
+
+
+        <LinearLayout
+            android:id="@+id/ll_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/et_full_name"
+            android:weightSum="2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_move_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/move_in"
+                    android:textColor="@color/colorBlack"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+                <EditText
+                    android:id="@+id/et_move_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
+                    android:padding="8dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableRight="@drawable/user"
+                    android:background="@drawable/rounded_edittext"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_move_in"
+                    app:layout_constraintLeft_toLeftOf="parent"></EditText>
+
+                <Button
+                    android:id="@+id/bt_check_in_calender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="@string/move_in"
+                    app:layout_constraintTop_toBottomOf="@+id/et_move_in"></Button>
+
+
+<!--                <DatePicker-->
+<!--                    android:id="@+id/dp_check_in_calender"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:datePickerMode="spinner"-->
+<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                    android:calendarViewShown="false"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"></DatePicker>-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_move_out"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/move_out"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+                    <EditText
+                        android:id="@+id/et_move_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginRight="35dp"
+                        android:padding="8dp"
+                        android:layout_marginTop="10dp"
+                        android:drawableRight="@drawable/user"
+                        android:background="@drawable/rounded_edittext"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_move_out"
+                        app:layout_constraintLeft_toLeftOf="parent"></EditText>
+
+                    <Button
+                        android:id="@+id/bt_check_out_calender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:text="@string/move_in"
+                        app:layout_constraintTop_toBottomOf="@+id/et_move_out"></Button>
+
+<!--                    <DatePicker-->
+<!--                        android:id="@+id/dp_calender"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:datePickerMode="spinner"-->
+<!--                        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                        android:calendarViewShown="false"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"></DatePicker>-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+
+    <RadioGroup
+        android:id="@+id/rg_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ll_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:padding="25dp">
+
+
+            </RadioButton>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:padding="25dp">
+            </RadioButton>
+        </LinearLayout>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_profession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profession"
+        android:layout_margin="35dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/rg_gender"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <EditText
+            android:id="@+id/et_profession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profession"
+            app:layout_constraintLeft_toLeftOf="parent"></EditText>
+
+
+    <TextView
+        android:id="@+id/tv_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        android:layout_margin="35dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_profession"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <EditText
+            android:id="@+id/et_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            app:layout_constraintTop_toBottomOf="@+id/tv_phone_number"
+            app:layout_constraintLeft_toLeftOf="parent"></EditText>
+
+
+    <TextView
+        android:id="@+id/tv_deposit_paid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deposit_paid"
+        android:layout_margin="35dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_phone_number"
+        app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <EditText
+            android:id="@+id/et_tv_deposit_paid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            app:layout_constraintTop_toBottomOf="@+id/tv_deposit_paid"
+            app:layout_constraintLeft_toLeftOf="parent"></EditText>
+
+        <CheckBox
+            android:id="@+id/cb_agreement_signed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lease_agreement_signed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="35dp"
+            app:layout_constraintTop_toBottomOf="@+id/et_tv_deposit_paid">
+
+        </CheckBox>
+
+<!--    <RadioGroup-->
+<!--        android:id="@+id/rg_sign"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_tv_deposit_paid"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <RadioButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/yes"-->
+<!--                android:padding="25dp">-->
+
+
+<!--            </RadioButton>-->
+
+<!--            <RadioButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/no"-->
+<!--                android:padding="25dp">-->
+<!--            </RadioButton>-->
+<!--        </LinearLayout>-->
+
+<!--    </RadioGroup>-->
+
+
+        <Button
+            android:id="@+id/bt_save"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+           android:layout_margin="30dp"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/black_round_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_agreement_signed"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
