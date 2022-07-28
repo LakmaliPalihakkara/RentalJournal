@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tenantjournal.Model.NewTenant;
@@ -34,10 +35,12 @@ public class LoginFragment extends Fragment {
 
     EditText etUsername, etPassword;
     Button btLogin;
+    TextView tvSignUp;
 
     String username, email, password;
 
-    NewTenant newTenant;
+ //   NewTenant newTenant;
+    private ArrayList<NewTenant> newTenantArrayList = new ArrayList<>();
 
     public LoginFragment() {
         // Required empty public constructor
@@ -53,11 +56,23 @@ public class LoginFragment extends Fragment {
         etUsername = view.findViewById(R.id.et_username);
         etPassword = view.findViewById(R.id.et_password);
         btLogin = view.findViewById(R.id.bt_login);
+        tvSignUp = view.findViewById(R.id.tv_signup);
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loadData();
+            }
+        });
+
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fr = new SignUpFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fr);
+                fragmentTransaction.commit();
             }
         });
 
@@ -70,53 +85,53 @@ public class LoginFragment extends Fragment {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedPreferences.getString("newTenant", null);
-            Type type = new TypeToken<NewTenant>() {
+            Type type = new TypeToken<ArrayList<NewTenant>>() {
             }.getType();
-            newTenant = gson.fromJson(json, type);
-            username = newTenant.getUsername();
-            email = newTenant.getEmail();
-            password = newTenant.getPassword();
+            newTenantArrayList = gson.fromJson(json, type);
 
-            if(etUsername.getText().toString().equals("")){
+            for(int i=0;i<newTenantArrayList.size();i++) {
+             //   username = newTenantArrayList.get(i).getUsername();
+            //    email = newTenantArrayList.get(i).getEmail();
+           //     password = newTenantArrayList.get(i).getPassword();
 
-                etUsername.setHint("Please enter your username");
-                etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
+
+                if (etUsername.getText().toString().equals("")) {
+
+                    etUsername.setHint("Please enter your username");
+                    etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
+
+                } else if (etPassword.getText().toString().equals("")) {
+                    etPassword.setHint("Please enter your password");
+                    etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if ((!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername())) || (!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername()))) {
+                    etUsername.setText("");
+
+                    etUsername.setHint("Incorrect username or email");
+                    etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
+
+                } else if (!etPassword.getText().toString().equals(newTenantArrayList.get(i).getPassword())) {
+                    etPassword.setText("");
+
+                    etPassword.setHint("Incorrect password");
+                    etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else {
+                    Fragment fr = new HomeFragment();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.replace(R.id.container, fr);
+                    fragmentTransaction.commit();
+                }
+
+                System.out.println(newTenantArrayList.get(i).getUsername());
 
             }
 
-            else if (etPassword.getText().toString().equals(""))
-            {
-                etPassword.setHint("Please enter your password");
-                etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
-            }
-
-            else if((!etUsername.getText().toString().equals(username)) || (!etUsername.getText().toString().equals(username)))
-            {
-                etUsername.setText("");
-
-                etUsername.setHint("Incorrect username or email");
-                etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
-
-            }else if(!etPassword.getText().toString().equals(password))
-            {
-                etPassword.setText("");
-
-                etPassword.setHint("Incorrect password");
-                etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
-            }
-            else
-            {
-                Fragment fr = new HomeFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fr);
-                fragmentTransaction.commit();
-            }
 
 //            if (tenantArrayList == null) {
 //                tenantArrayList = new ArrayList<>();
 //            }
         }
     }
+
 
 }

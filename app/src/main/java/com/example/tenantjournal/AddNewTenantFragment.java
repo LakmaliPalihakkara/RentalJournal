@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -39,9 +40,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AddNewTenantFragment extends Fragment {
 
-    Button btnCheckIn, btnCheckOut, btSave;
+    Button btSave,btClose;
     DatePickerDialog datePicker;
-    EditText etPassport, etFullName,etCheckIn,etCheckOut,etProfession, etPhoneNumber, etAddress, etDepositPaid;
+    EditText etPassport, etFullName,etCheckIn,etCheckOut,etProfession, etPhoneNumber, etDepositPaid;
     RadioGroup rgGender;
     RadioButton rbGender;
 
@@ -62,8 +63,7 @@ public class AddNewTenantFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_new_tenant, container, false);
 
         btSave = (Button) rootView.findViewById(R.id.bt_save);
-        btnCheckIn = (Button) rootView.findViewById(R.id.bt_check_in_calender);
-        btnCheckOut = (Button) rootView.findViewById(R.id.bt_check_out_calender);
+        btClose = (Button) rootView.findViewById(R.id.bt_close);
 
         etPassport = (EditText) rootView.findViewById(R.id.et_passport_no);
         etFullName = (EditText) rootView.findViewById(R.id.et_full_name);
@@ -85,17 +85,24 @@ public class AddNewTenantFragment extends Fragment {
         etCheckOut.setInputType(InputType.TYPE_NULL);
 
 
-        btnCheckIn.setOnClickListener(new View.OnClickListener() {
+        etCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setDate(etCheckIn);
             }
         });
 
-        btnCheckOut.setOnClickListener(new View.OnClickListener() {
+        etCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setDate(etCheckOut);
+            }
+        });
+
+        btClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callHomeFragment();
             }
         });
 
@@ -126,18 +133,38 @@ public class AddNewTenantFragment extends Fragment {
 
           //   saveData();
 
+                if(tenantArrayList.size() > 0) {
 
-                tenantArrayList.add(new Tenant(etPassport.getText().toString(),
-                        etFullName.getText().toString(),
-                        etCheckIn.getText().toString(),
-                        etCheckOut.getText().toString(),
-                        "female",
-                        etProfession.getText().toString(),
-                        etPhoneNumber.getText().toString(),
-                        etAddress.getText().toString(),
-                        etDepositPaid.getText().toString(),
-                        true
+                    for(int i=1; i<tenantArrayList.size();i++) {
+
+                        tenantArrayList.add(i, new Tenant(etPassport.getText().toString(),
+                                etFullName.getText().toString(),
+                                etCheckIn.getText().toString(),
+                                etCheckOut.getText().toString(),
+                                "female",
+                                etProfession.getText().toString(),
+                                etPhoneNumber.getText().toString(),
+                                etDepositPaid.getText().toString(),
+                                true
                         ));
+                    }
+
+
+                }
+                else
+                {
+                    tenantArrayList.add(new Tenant(etPassport.getText().toString(),
+                            etFullName.getText().toString(),
+                            etCheckIn.getText().toString(),
+                            etCheckOut.getText().toString(),
+                            "female",
+                            etProfession.getText().toString(),
+                            etPhoneNumber.getText().toString(),
+                            etDepositPaid.getText().toString(),
+                            true
+                    ));
+                }
+
                 //tenantInformationAdapter.notifyItemInserted(tenantArrayList.size());
 
                 saveData();
@@ -158,6 +185,7 @@ public class AddNewTenantFragment extends Fragment {
         int year = cldr.get(Calendar.YEAR);
         // date picker dialog
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
             datePicker = new DatePickerDialog(getContext(),
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
@@ -165,6 +193,8 @@ public class AddNewTenantFragment extends Fragment {
                             editText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                         }
                     }, year, month, day);
+
+            datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         }
         datePicker.show();
     }
@@ -209,13 +239,7 @@ public class AddNewTenantFragment extends Fragment {
         Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
 
-
-
-        Fragment fr = new HomeFragment();
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fr);
-        fragmentTransaction.commit();
+        callHomeFragment();
     }
 //
 //
@@ -233,6 +257,15 @@ public class AddNewTenantFragment extends Fragment {
 //        }
 //    }
 
+
+    private void callHomeFragment()
+    {
+        android.app.Fragment fr = new HomeFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fr);
+        fragmentTransaction.commit();
+    }
 
 
 }

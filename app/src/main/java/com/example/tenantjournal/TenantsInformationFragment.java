@@ -2,6 +2,8 @@ package com.example.tenantjournal;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -23,6 +26,7 @@ public class TenantsInformationFragment extends Fragment {
     private ListView lvSearch;
     private EditText etSearch;
     private ArrayAdapter<String> searchAdapter;
+    Button btClose;
 
     String data[]={"Anne", "Mark", "Sara"};
 
@@ -40,6 +44,8 @@ public class TenantsInformationFragment extends Fragment {
 
         lvSearch = (ListView) rootView.findViewById(R.id.lv_search);
         etSearch = (EditText) rootView.findViewById(R.id.et_search);
+        btClose = (Button) rootView.findViewById(R.id.bt_close);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             searchAdapter = new ArrayAdapter<String>(getContext(), R.layout.search_list_item, R.id.textview,data);
         }
@@ -60,6 +66,17 @@ public class TenantsInformationFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        btClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fr = new HomeFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fr);
+                fragmentTransaction.commit();
             }
         });
 

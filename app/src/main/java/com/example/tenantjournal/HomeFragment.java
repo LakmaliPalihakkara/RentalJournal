@@ -1,6 +1,8 @@
 package com.example.tenantjournal;
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.core.content.ContextCompat;
@@ -40,6 +43,7 @@ public class HomeFragment extends Fragment {
     TenantInformationAdapter tenantInformationAdapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
+    Button btNewTenant, btViewTenant, btTenantPayment;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,15 +57,48 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
-
+        btNewTenant = (Button) rootView.findViewById(R.id.bt_new_tenant);
+        btViewTenant = (Button) rootView.findViewById(R.id.bt_view_tenant);
+        btTenantPayment = (Button) rootView.findViewById(R.id.bt_tenant_payment);
 
         loadData();
         buildRecyclerView();
+
+        btNewTenant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                callFragment(new AddNewTenantFragment());
+
+            }
+        });
+
+        btViewTenant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callFragment(new TenantsInformationFragment());
+            }
+        });
+
+        btTenantPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callFragment(new TenantPaymentFragment());
+            }
+        });
 
 
         return rootView;
     }
 
+    private void callFragment(Fragment fragment)
+    {
+        Fragment fr = fragment;
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fr);
+        fragmentTransaction.commit();
+    }
 
     private void buildRecyclerView() {
 

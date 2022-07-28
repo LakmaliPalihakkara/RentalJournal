@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="20dp"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
@@ -17,7 +18,7 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/img_logo"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
     <LinearLayout
@@ -37,9 +38,7 @@
                 android:id="@+id/bt_new_tenant"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="10dp"
                 android:text="@string/add_new_tenant"
                 android:textAllCaps="false"
                 android:textSize="20dp"
@@ -47,7 +46,7 @@
                 android:background="@drawable/black_round_btn"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_password"></Button>
+                app:layout_constraintTop_toTopOf="parent"></Button>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -60,9 +59,7 @@
                 android:id="@+id/bt_view_tenant"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
                 android:text="@string/view_tenant_information"
                 android:textAllCaps="false"
                 android:textSize="20dp"
@@ -70,7 +67,7 @@
                 android:background="@drawable/black_round_btn"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_password"></Button>
+                app:layout_constraintTop_toTopOf="parent"></Button>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
@@ -91,12 +88,33 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_btns"></Button>
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_monthly_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/black_round_btn"
+        app:layout_constraintTop_toBottomOf="@+id/bt_tenant_payment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textSize="15dp"
+            android:text="@string/monthly_payment_for"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+        </TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_rent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/bt_tenant_payment"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/cl_monthly_payment"
         app:layout_constraintLeft_toLeftOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
 

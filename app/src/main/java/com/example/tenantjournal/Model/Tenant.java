@@ -8,11 +8,10 @@ public class Tenant {
     String gender;
     String profession;
     String phoneNumber;
-    String address;
     String depositPaid;
     Boolean signed;
 
-    public Tenant(String passport, String fullName, String checkInDate, String checkOutDate, String gender, String profession, String phoneNumber, String address, String depositPaid, Boolean signed) {
+    public Tenant(String passport, String fullName, String checkInDate, String checkOutDate, String gender, String profession, String phoneNumber,String depositPaid, Boolean signed) {
         this.passport = passport;
         this.fullName = fullName;
         this.checkInDate = checkInDate;
@@ -20,7 +19,6 @@ public class Tenant {
         this.gender = gender;
         this.profession = profession;
         this.phoneNumber = phoneNumber;
-        this.address = address;
         this.depositPaid = depositPaid;
         this.signed = signed;
     }
@@ -79,14 +77,6 @@ public class Tenant {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getDepositPaid() {

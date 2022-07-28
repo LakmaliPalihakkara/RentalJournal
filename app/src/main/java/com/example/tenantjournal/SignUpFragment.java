@@ -17,7 +17,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tenantjournal.Model.NewTenant;
+import com.example.tenantjournal.Model.Tenant;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -30,7 +33,8 @@ public class SignUpFragment extends Fragment {
     EditText etUsername, etEmail, etPassword, etConfirmPassword;
     Button btSave;
 
-    NewTenant newTenantObj;
+  //  NewTenant newTenantObj;
+    private ArrayList<NewTenant> newTenantArrayList = new ArrayList<>();
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -114,16 +118,20 @@ public class SignUpFragment extends Fragment {
 
     private void saveData() {
 
-        newTenantObj = new NewTenant(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString());
+
+            newTenantArrayList.add(new NewTenant(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             Gson gson = new Gson();
-            String json = gson.toJson(newTenantObj);
+            String json = gson.toJson(newTenantArrayList);
             editor.putString("newTenant", json);
             editor.apply();
             Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
+
+        System.out.println(newTenantArrayList.size());
     }
 }
