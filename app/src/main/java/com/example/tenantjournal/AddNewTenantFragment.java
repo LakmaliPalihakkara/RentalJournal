@@ -16,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tenantjournal.Adapter.TenantInformationAdapter;
+import com.example.tenantjournal.Model.NewTenant;
 import com.example.tenantjournal.Model.Tenant;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,9 +47,17 @@ public class AddNewTenantFragment extends Fragment {
     DatePickerDialog datePicker;
     EditText etPassport, etFullName,etCheckIn,etCheckOut,etProfession, etPhoneNumber, etDepositPaid;
     RadioGroup rgGender;
-    RadioButton rbGender;
+    RadioButton rbMale, rbFemale;
+    CheckBox cbSigned;
 
-    private ArrayList<Tenant> tenantArrayList = new ArrayList<>();
+    private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
+
+    String moveIn, moveOut;
+    String gender;
+    boolean isSigned;
+
+    Tenant tenant;
+
 //
 //    TenantInformationAdapter tenantInformationAdapter;
 //    RecyclerView recyclerView;
@@ -74,10 +85,17 @@ public class AddNewTenantFragment extends Fragment {
         etDepositPaid = (EditText) rootView.findViewById(R.id.et_deposit_paid);
 
         rgGender = (RadioGroup) rootView.findViewById(R.id.rg_gender);
-
+        rbMale = (RadioButton) rootView.findViewById(R.id.rb_male);
+        rbFemale = (RadioButton) rootView.findViewById(R.id.rb_female);
+        cbSigned = (CheckBox) rootView.findViewById(R.id.cb_agreement_signed);
 
      //   recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
 
+
+        final Bundle bundle = getArguments();
+        if (bundle != null) {
+            tenantArrayList = bundle.getParcelableArrayList("arr");
+        }
 
 
 
@@ -89,6 +107,7 @@ public class AddNewTenantFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setDate(etCheckIn);
+                moveIn = etCheckIn.getText().toString();
             }
         });
 
@@ -96,6 +115,7 @@ public class AddNewTenantFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setDate(etCheckOut);
+                moveOut = etCheckOut.getText().toString();
             }
         });
 
@@ -127,45 +147,28 @@ public class AddNewTenantFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-          //   LoggedUser.getInstance().saveData(tenantArrayList);
-
-
-          //   saveData();
-
-                if(tenantArrayList.size() > 0) {
-
-                    for(int i=1; i<tenantArrayList.size();i++) {
-
-                        tenantArrayList.add(i, new Tenant(etPassport.getText().toString(),
-                                etFullName.getText().toString(),
-                                etCheckIn.getText().toString(),
-                                etCheckOut.getText().toString(),
-                                "female",
-                                etProfession.getText().toString(),
-                                etPhoneNumber.getText().toString(),
-                                etDepositPaid.getText().toString(),
-                                true
-                        ));
-                    }
-
-
-                }
-                else
-                {
-                    tenantArrayList.add(new Tenant(etPassport.getText().toString(),
+                    tenant = new Tenant(etPassport.getText().toString(),
                             etFullName.getText().toString(),
                             etCheckIn.getText().toString(),
                             etCheckOut.getText().toString(),
-                            "female",
+                            gender,
                             etProfession.getText().toString(),
                             etPhoneNumber.getText().toString(),
                             etDepositPaid.getText().toString(),
-                            true
-                    ));
-                }
+                            isSigned
+                    );
 
-                //tenantInformationAdapter.notifyItemInserted(tenantArrayList.size());
+                if (tenantArrayList == null) {
+                tenantArrayList = new ArrayList<>();
+                    tenantArrayList.add(tenant);
+            } else
+                    {
+
+
+                        tenantArrayList.add(tenant);
+                    }
+
+
 
                 saveData();
             }
@@ -202,8 +205,25 @@ public class AddNewTenantFragment extends Fragment {
     public void checkButton(View v){
         int radioId = rgGender.getCheckedRadioButtonId();
 
-        rbGender = v.findViewById(radioId);
+      //  rbGender = v.findViewById(radioId);
 
+        if(rbMale.isChecked())
+        {
+            gender = rbMale.getText().toString();
+        }
+        else
+        {
+            gender = rbFemale.getText().toString();
+        }
+
+        if(cbSigned.isChecked())
+        {
+            isSigned = true;
+        }
+        else
+        {
+            isSigned = false;
+        }
 
 
     }
@@ -234,7 +254,7 @@ public class AddNewTenantFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(tenantArrayList);
-        editor.putString("courses", json);
+        editor.putString("tenant", json);
         editor.apply();
         Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
@@ -260,8 +280,11 @@ public class AddNewTenantFragment extends Fragment {
 
     private void callHomeFragment()
     {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("arr", tenantArrayList);
         android.app.Fragment fr = new HomeFragment();
         FragmentManager fm = getFragmentManager();
+        fr.setArguments(bundle);
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.container, fr);
         fragmentTransaction.commit();

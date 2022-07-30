@@ -35,8 +35,8 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Tenant animal = mData.get(position);
-        holder.myTextView.setText(animal.getFullName());
+        Tenant tenant = mData.get(position);
+        holder.myTextView.setText(tenant.getFullName());
     }
 
     // total number of rows

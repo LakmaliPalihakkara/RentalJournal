@@ -1,6 +1,9 @@
 package com.example.tenantjournal.Model;
 
-public class Tenant {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Tenant implements Parcelable {
     String passport;
     String fullName;
     String checkInDate;
@@ -22,6 +25,31 @@ public class Tenant {
         this.depositPaid = depositPaid;
         this.signed = signed;
     }
+
+    protected Tenant(Parcel in) {
+        passport = in.readString();
+        fullName = in.readString();
+        checkInDate = in.readString();
+        checkOutDate = in.readString();
+        gender = in.readString();
+        profession = in.readString();
+        phoneNumber = in.readString();
+        depositPaid = in.readString();
+        byte tmpSigned = in.readByte();
+        signed = tmpSigned == 0 ? null : tmpSigned == 1;
+    }
+
+    public static final Creator<Tenant> CREATOR = new Creator<Tenant>() {
+        @Override
+        public Tenant createFromParcel(Parcel in) {
+            return new Tenant(in);
+        }
+
+        @Override
+        public Tenant[] newArray(int size) {
+            return new Tenant[size];
+        }
+    };
 
     public String getPassport() {
         return passport;
@@ -93,5 +121,23 @@ public class Tenant {
 
     public void setSigned(Boolean signed) {
         this.signed = signed;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(passport);
+        parcel.writeString(fullName);
+        parcel.writeString(checkInDate);
+        parcel.writeString(checkOutDate);
+        parcel.writeString(gender);
+        parcel.writeString(profession);
+        parcel.writeString(phoneNumber);
+        parcel.writeString(depositPaid);
+        parcel.writeByte((byte) (signed == null ? 0 : signed ? 1 : 2));
     }
 }

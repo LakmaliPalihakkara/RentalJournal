@@ -117,5 +117,11 @@
         app:layout_constraintTop_toBottomOf="@+id/cl_monthly_payment"
         app:layout_constraintLeft_toLeftOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
+    <ListView
+        android:id="@+id/lv_tenant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cl_monthly_payment"
+        app:layout_constraintLeft_toLeftOf="parent"></ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
