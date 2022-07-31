@@ -30,16 +30,15 @@
     <!--Add a New Tenant-->
     <string name="add_a_new_tenant">Add a New Tenant</string>
     <string name="tenant_id_number">Tenant ID Number</string>
-    <string name="tenant_full_name">Tenant Full Name</string>
-    <string name="move_in">Move In</string>
-    <string name="move_out">Move Out</string>
-    <string name="profession">Occupation</string>
+    <string name="tenant_full_name">Tenant Full Name:</string>
+    <string name="move_in">Move In:</string>
+    <string name="move_out">Move Out:</string>
+    <string name="profession">Occupation:</string>
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="address">Address</string>
-    <string name="deposit_paid">Deposit Paid</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="deposit_paid">Deposit Paid:</string>
     <string name="lease_agreement_signed">Lease Agreement Signed</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -60,10 +59,10 @@
     <string name="tenant_details">Tenant Details</string>
     <string name="personal_info">Personal Info</string>
     <string name="payment_summary">Payment Summary</string>
-    <string name="total_rental_fee_paid">Total Rental Fee Paid</string>
-    <string name="deposit_included">Deposit Included</string>
-    <string name="remaining_rental_fee">Remaining Rental Fee</string>
-    <string name="remaining_damage_payment">Remaining Damage Payment</string>
-    <string name="outstanding_balance">Outstanding Balance</string>
+    <string name="total_rental_fee_paid">Total Rental Fee Paid:</string>
+    <string name="deposit_included">Deposit Included:</string>
+    <string name="remaining_rental_fee">Remaining Rental Fee:</string>
+    <string name="remaining_damage_payment">Remaining Damage Payment:</string>
+    <string name="outstanding_balance">Outstanding Balance:</string>
     <string name="edit">Edit</string>
 </resources>

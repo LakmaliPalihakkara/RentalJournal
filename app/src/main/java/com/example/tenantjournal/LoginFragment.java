@@ -89,40 +89,46 @@ public class LoginFragment extends Fragment {
             }.getType();
             newTenantArrayList = gson.fromJson(json, type);
 
-            for(int i=0;i<newTenantArrayList.size();i++) {
-             //   username = newTenantArrayList.get(i).getUsername();
-            //    email = newTenantArrayList.get(i).getEmail();
-           //     password = newTenantArrayList.get(i).getPassword();
+            if(newTenantArrayList != null) {
+                for (int i = 0; i < newTenantArrayList.size(); i++) {
+                    //   username = newTenantArrayList.get(i).getUsername();
+                    //    email = newTenantArrayList.get(i).getEmail();
+                    //     password = newTenantArrayList.get(i).getPassword();
 
 
-                if (etUsername.getText().toString().equals("")) {
+                    if (etUsername.getText().toString().equals("")) {
 
-                    etUsername.setHint("Please enter your username");
-                    etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
+                        etUsername.setHint("Please enter your username");
+                        etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
 
-                } else if (etPassword.getText().toString().equals("")) {
-                    etPassword.setHint("Please enter your password");
-                    etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
-                } else if ((!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername())) || (!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername()))) {
-                    etUsername.setText("");
+                    } else if (etPassword.getText().toString().equals("")) {
+                        etPassword.setHint("Please enter your password");
+                        etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
+                    } else if ((!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername())) || (!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername()))) {
+                        etUsername.setText("");
 
-                    etUsername.setHint("Incorrect username or email");
-                    etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
+                        etUsername.setHint("Incorrect username or email");
+                        etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
 
-                } else if (!etPassword.getText().toString().equals(newTenantArrayList.get(i).getPassword())) {
-                    etPassword.setText("");
+                    } else if (!etPassword.getText().toString().equals(newTenantArrayList.get(i).getPassword())) {
+                        etPassword.setText("");
 
-                    etPassword.setHint("Incorrect password");
-                    etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
-                } else {
-                    Fragment fr = new HomeFragment();
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                    fragmentTransaction.replace(R.id.container, fr);
-                    fragmentTransaction.commit();
+                        etPassword.setHint("Incorrect password");
+                        etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
+                    } else {
+                        Fragment fr = new HomeFragment();
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.container, fr);
+                        fragmentTransaction.commit();
+                    }
+
+                    System.out.println(newTenantArrayList.get(i).getUsername());
+
                 }
-
-                System.out.println(newTenantArrayList.get(i).getUsername());
+            }
+            else{
+                Toast.makeText(getContext(), "User not available", Toast.LENGTH_SHORT).show();
 
             }
 

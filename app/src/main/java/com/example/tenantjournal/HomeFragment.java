@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tenantjournal.Adapter.AddNewTenantAdapter;
 import com.example.tenantjournal.Adapter.TenantInformationAdapter;
 import com.example.tenantjournal.Model.Tenant;
 import com.google.gson.Gson;
@@ -42,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
 
-    TenantInformationAdapter tenantInformationAdapter;
+    AddNewTenantAdapter addNewTenantAdapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     Button btNewTenant, btViewTenant, btTenantPayment;
@@ -168,14 +169,14 @@ public class HomeFragment extends Fragment {
 
             if (tenantArrayList != null) {
 
-                tenantInformationAdapter = new TenantInformationAdapter(getContext(), tenantArrayList);
+                addNewTenantAdapter = new AddNewTenantAdapter(getContext(), tenantArrayList);
 
-                tenantInformationAdapter.notifyDataSetChanged();
+                addNewTenantAdapter.notifyDataSetChanged();
 
                 LinearLayoutManager manager = new LinearLayoutManager(getContext());
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(manager);
-                recyclerView.setAdapter(tenantInformationAdapter);
+                recyclerView.setAdapter(addNewTenantAdapter);
             }
         }
     }

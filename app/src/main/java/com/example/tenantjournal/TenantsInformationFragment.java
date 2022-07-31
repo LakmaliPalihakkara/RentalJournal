@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.tenantjournal.Adapter.AddNewTenantAdapter;
 import com.example.tenantjournal.Adapter.TenantInformationAdapter;
 import com.example.tenantjournal.Model.NewTenant;
 import com.example.tenantjournal.Model.Tenant;
@@ -44,8 +45,10 @@ public class TenantsInformationFragment extends Fragment {
     private ArrayAdapter<String> searchAdapter;
     Button btClose;
 
+    TenantInformationAdapter tenantInformationAdapter;
+    RecyclerView recyclerView;
+
     private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
-    private ArrayList<String> tenantArrayListName = new ArrayList<String>();
     SearchView svSearch;
 
     public TenantsInformationFragment() {
@@ -60,6 +63,7 @@ public class TenantsInformationFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_tenants_information, container, false);
 
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
         lvSearch = (ListView) rootView.findViewById(R.id.lv_search);
         etSearch = (EditText) rootView.findViewById(R.id.et_search);
         btClose = (Button) rootView.findViewById(R.id.bt_close);
@@ -67,7 +71,7 @@ public class TenantsInformationFragment extends Fragment {
 
         loadData();
 
-        //    buildRecyclerView();
+        buildRecyclerView();
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            searchAdapter = new ArrayAdapter<Tenant>(getContext(), R.layout.search_list_item, R.id.textview,tenantArrayList);
@@ -75,16 +79,17 @@ public class TenantsInformationFragment extends Fragment {
 //            lvSearch.setAdapter(searchAdapter);
 //        }
 
-        for (int i = 0; i < tenantArrayList.size(); i++) {
-            tenantArrayListName.add(tenantArrayList.get(i).getFullName());
-        }
+//        for (int i = 0; i < tenantArrayList.size(); i++) {
+//            tenantArrayListName.add(tenantArrayList.get(i).getFullName());
+//        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            searchAdapter = new ArrayAdapter<String>(getContext(), R.layout.search_list_item, R.id.textview, tenantArrayListName);
-
-
-            lvSearch.setAdapter(searchAdapter);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            searchAdapter = new ArrayAdapter<String>(getContext(), R.layout.search_list_item, R.id.textview, tenantArrayListName);
+//
+//            viewOnClick(rootView);
+//
+//            lvSearch.setAdapter(searchAdapter);
+//        }
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,7 +100,8 @@ public class TenantsInformationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                searchAdapter.getFilter().filter(s);
+              //  searchAdapter.getFilter().filter(s);
+                tenantInformationAdapter.getFilter().filter(s);
 
             }
 
@@ -118,6 +124,51 @@ public class TenantsInformationFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    private void buildRecyclerView() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+
+            //   adapterNames.notifyDataSetChanged();
+
+            //     loadData();
+
+            if (tenantArrayList != null) {
+
+                tenantInformationAdapter = new TenantInformationAdapter(getContext(), tenantArrayList, new TenantInformationAdapter.ViewClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("position",position);
+                        bundle.putParcelableArrayList("arr",tenantArrayList);
+
+                        Fragment fr = new TenantDetailsFragment();
+                        FragmentManager fm = getFragmentManager();
+                        fr.setArguments(bundle);
+                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.container, fr);
+                        fragmentTransaction.commit();
+                    }
+                });
+
+                tenantInformationAdapter.notifyDataSetChanged();
+
+                LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setAdapter(tenantInformationAdapter);
+            }
+        }
+    }
+
+    public void viewOnClick(View v) {
+        final int position = lvSearch.getPositionForView(v);
+//        String text = lvSearch.getItemAtPosition(position).toString();
+
+        System.out.println("view"+position);
+       // Toast.makeText(getApplicationContext, text, Toast.LENGTH_SHORT).show();
     }
 
     private void loadData() {

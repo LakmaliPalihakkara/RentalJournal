@@ -9,7 +9,7 @@
     android:background="@color/colorPrimary">
 
     <Button
-        android:id="@+id/bt_payment_summary_close"
+        android:id="@+id/bt_close"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="X"
@@ -72,6 +72,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_personal_info"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
+        <TextView
+            android:id="@+id/tv_tenant_id_number_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_personal_info"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_tenant_id_number"></TextView>
+
     <TextView
         android:id="@+id/tv_tenant_full_name"
         android:layout_width="wrap_content"
@@ -82,6 +94,18 @@
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_tenant_id_number"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/tv_tenant_full_name_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tenant_id_number"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_tenant_full_name"></TextView>
 
     <TextView
         android:id="@+id/tv_occupation"
@@ -94,7 +118,20 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_tenant_full_name"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
-    <TextView
+        <TextView
+            android:id="@+id/tv_occupation_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tenant_full_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_occupation"></TextView>
+
+
+        <TextView
         android:id="@+id/tv_phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,6 +141,18 @@
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_occupation"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/tv_phone_number_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_occupation"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_phone_number"></TextView>
 
     <TextView
         android:id="@+id/tv_move_in"
@@ -116,6 +165,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_phone_number"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
+        <TextView
+            android:id="@+id/tv_move_in_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_phone_number"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_move_in"></TextView>
+
     <TextView
         android:id="@+id/tv_move_out"
         android:layout_width="wrap_content"
@@ -126,6 +187,18 @@
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_move_in"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/tv_move_out_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_move_in"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_move_out"></TextView>
 
     <TextView
         android:id="@+id/tv_payment_summary"
@@ -163,6 +236,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_payment_summary"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
+        <TextView
+            android:id="@+id/tv_total_rental_fee_paid_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_payment_summary"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_total_rental_fee_paid"></TextView>
+
     <TextView
         android:id="@+id/tv_deposit_included"
         android:layout_width="wrap_content"
@@ -173,6 +258,18 @@
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_total_rental_fee_paid"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/tv_deposit_included_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_rental_fee_paid"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_deposit_included"></TextView>
 
     <TextView
         android:id="@+id/tv_remaining_rental_fee"
@@ -185,6 +282,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_deposit_included"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
+        <TextView
+            android:id="@+id/tv_remaining_rental_fee_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_deposit_included"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_remaining_rental_fee"></TextView>
+
     <TextView
         android:id="@+id/tv_remaining_damage_payment"
         android:layout_width="wrap_content"
@@ -196,6 +305,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_remaining_rental_fee"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
+        <TextView
+            android:id="@+id/tv_remaining_damage_payment_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_remaining_rental_fee"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_remaining_damage_payment"></TextView>
+
     <TextView
         android:id="@+id/tv_outstanding_balance"
         android:layout_width="wrap_content"
@@ -206,6 +327,18 @@
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_remaining_damage_payment"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/tv_outstanding_balance_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_remaining_damage_payment"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_outstanding_balance"></TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
