@@ -139,7 +139,7 @@ public class TenantsInformationFragment extends Fragment {
 
                 tenantInformationAdapter = new TenantInformationAdapter(getContext(), tenantArrayList, new TenantInformationAdapter.ViewClickListener() {
                     @Override
-                    public void onClick(View view, int position) {
+                    public void onClickView(View view, int position) {
                         Bundle bundle = new Bundle();
                         bundle.putInt("position",position);
                         bundle.putParcelableArrayList("arr",tenantArrayList);
@@ -150,6 +150,16 @@ public class TenantsInformationFragment extends Fragment {
                         FragmentTransaction fragmentTransaction = fm.beginTransaction();
                         fragmentTransaction.replace(R.id.container, fr);
                         fragmentTransaction.commit();
+                    }
+
+                    @Override
+                    public void onClickDelete(View view, int position, ArrayList<Tenant> arrayList) {
+
+                     //   tenantArrayList.clear();
+                     //   tenantArrayList = arrayList;
+                 //  tenantArrayList.remove(position);
+//                  searchAdapter.notifyItemRemoved(position);
+//                   notifyItemRangeChanged(position,mData.size());
                     }
                 });
 

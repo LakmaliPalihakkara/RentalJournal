@@ -26,7 +26,8 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
 
     public interface ViewClickListener {
 
-        void onClick(View view, int position);
+        void onClickView(View view, int position);
+        void onClickDelete(View view, int position, ArrayList<Tenant> arrayList);
     }
 
     ViewClickListener viewClickListener;
@@ -66,20 +67,35 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextView;
-        Button btnView;
+        Button btnView, btnDelete;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.textview);
             btnView = itemView.findViewById(R.id.bt_view);
+            btnDelete = itemView.findViewById(R.id.bt_delete);
+
             itemView.setOnClickListener(this);
 
            btnView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
-                   viewClickListener.onClick(view, getAdapterPosition());
+                   viewClickListener.onClickView(view, getAdapterPosition());
                }
            });
+
+           btnDelete.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   mData.remove(getAdapterPosition());
+                   notifyItemRemoved(getAdapterPosition());
+                   notifyItemRangeChanged(getAdapterPosition(),mData.size());
+
+
+                   viewClickListener.onClickDelete(view,getAbsoluteAdapterPosition(), mData);
+               }
+           });
+
         }
 
 
@@ -87,7 +103,8 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
 
-            if (viewClickListener != null) viewClickListener.onClick(view, getAdapterPosition());
+            //if (viewClickListener != null) viewClickListener.onClickView(view, getAdapterPosition());
+
         }
 
 //        String getItem(int id) {
