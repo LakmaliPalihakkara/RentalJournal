@@ -3,29 +3,22 @@ package com.example.tenantjournal;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
 import android.app.Fragment;
 
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tenantjournal.Adapter.AddNewTenantAdapter;
-import com.example.tenantjournal.Adapter.TenantInformationAdapter;
 import com.example.tenantjournal.Model.NewPayment;
 import com.example.tenantjournal.Model.Tenant;
 import com.google.gson.Gson;
@@ -42,7 +35,8 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class HomeFragment extends Fragment {
 
-    private ArrayList<NewPayment> tenantArrayList = new ArrayList<NewPayment>();
+    private ArrayList<NewPayment> paymentArrayList = new ArrayList<NewPayment>();
+    private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
 
     AddNewTenantAdapter addNewTenantAdapter;
     RecyclerView recyclerView;
@@ -83,7 +77,8 @@ public class HomeFragment extends Fragment {
         final Bundle bundle = getArguments();
         if (bundle != null) {
          //   tenant = bundle.getParcelable("tenant");
-            tenantArrayList = bundle.getParcelableArrayList("arr"); // Key
+            paymentArrayList = bundle.getParcelableArrayList("payment");
+            tenantArrayList = bundle.getParcelableArrayList("tenant");// Key
 
 
 
@@ -120,7 +115,7 @@ public class HomeFragment extends Fragment {
                // callFragment(new AddNewTenantFragment());
 
                 Bundle bundle1 = new Bundle();
-                bundle1.putParcelableArrayList("arr",tenantArrayList);
+                bundle1.putParcelableArrayList("tenant", tenantArrayList);
 
 
                 Fragment fr = new AddNewTenantFragment();
@@ -136,7 +131,15 @@ public class HomeFragment extends Fragment {
         btViewTenant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callFragment(new TenantsInformationFragment());
+                Bundle bundle1 = new Bundle();
+                bundle1.putParcelableArrayList("tenant", tenantArrayList);
+
+                Fragment fr = new TenantsInformationFragment();
+                FragmentManager fm = getFragmentManager();
+                fr.setArguments(bundle1);
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fr);
+                fragmentTransaction.commit();
             }
         });
 
@@ -144,8 +147,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle bundle1 = new Bundle();
-                bundle1.putParcelableArrayList("arr",tenantArrayList);
-
+                bundle1.putParcelableArrayList("payment", paymentArrayList);
 
                 Fragment fr = new TenantPaymentFragment();
                 FragmentManager fm = getFragmentManager();
@@ -178,9 +180,9 @@ public class HomeFragment extends Fragment {
 
             //     loadData();
 
-            if (tenantArrayList != null) {
+            if (paymentArrayList != null) {
 
-                addNewTenantAdapter = new AddNewTenantAdapter(getContext(), tenantArrayList);
+                addNewTenantAdapter = new AddNewTenantAdapter(getContext(), paymentArrayList);
 
                 addNewTenantAdapter.notifyDataSetChanged();
 
@@ -201,8 +203,8 @@ public class HomeFragment extends Fragment {
             }.getType();
 
 
-                tenantArrayList = gson.fromJson(json, type);
-                saveData(tenantArrayList);
+                paymentArrayList = gson.fromJson(json, type);
+                saveData(paymentArrayList);
 
         }
     }

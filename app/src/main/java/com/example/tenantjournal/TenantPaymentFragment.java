@@ -87,7 +87,7 @@ public class TenantPaymentFragment extends Fragment {
 
         final Bundle bundle = getArguments();
         if (bundle != null) {
-            tenantArrayList = bundle.getParcelableArrayList("arr");
+            tenantArrayList = bundle.getParcelableArrayList("payment");
         }
 
         return rootView;
@@ -197,7 +197,7 @@ public class TenantPaymentFragment extends Fragment {
     private void callHomeFragment()
     {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("arr", tenantArrayList);
+        bundle.putParcelableArrayList("payment", tenantArrayList);
         android.app.Fragment fr = new HomeFragment();
         FragmentManager fm = getFragmentManager();
         fr.setArguments(bundle);

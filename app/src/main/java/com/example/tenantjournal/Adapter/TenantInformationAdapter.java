@@ -1,6 +1,8 @@
 package com.example.tenantjournal.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +10,20 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tenantjournal.Model.NewPayment;
 import com.example.tenantjournal.Model.Tenant;
 import com.example.tenantjournal.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInformationAdapter.ViewHolder> implements Filterable {
     private ArrayList<Tenant> mData;
@@ -23,6 +32,7 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
 
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    Context context;
 
     public interface ViewClickListener {
 
@@ -40,6 +50,7 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
         this.mData = data;
         FullList = new ArrayList<>(data);
         this.viewClickListener = listener;
+        this.context = context;
     }
 
 
@@ -91,7 +102,7 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
                    notifyItemRemoved(getAdapterPosition());
                    notifyItemRangeChanged(getAdapterPosition(),mData.size());
 
-
+                   saveData();
                    viewClickListener.onClickDelete(view,getAbsoluteAdapterPosition(), mData);
                }
            });
@@ -157,5 +168,33 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
             notifyDataSetChanged();
         }
     };
+
+
+    private void saveData() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("shared preferences", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            Gson gson = new Gson();
+            String json = gson.toJson(mData);
+            editor.putString("newTenant", json);
+            editor.apply();
+            Toast.makeText(context, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loadData() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("shared preferences", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("newPayment", null);
+            Type type = new TypeToken<ArrayList<NewPayment>>() {
+            }.getType();
+
+
+          //  paymentArrayList = gson.fromJson(json, type);
+          //  saveData(paymentArrayList);
+
+        }
+    }
 }
 

@@ -3,12 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/colorLightGray"></View>
+    android:layout_height="wrap_content"
+    android:background="@drawable/table_frame">
 
     <LinearLayout
         android:id="@+id/ll_table_headers"
@@ -23,9 +19,8 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textStyle="bold"
             android:layout_weight="1"
-            android:text="@string/rent_paid"
+            android:textColor="@color/colorDarkGreen"
             android:gravity="center">
         </TextView>
 
@@ -33,8 +28,8 @@
             android:id="@+id/tv_date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textStyle="bold"
             android:layout_weight="1"
+            android:textColor="@color/colorDarkGreen"
             android:gravity="center">
         </TextView>
 
@@ -42,8 +37,8 @@
             android:id="@+id/tv_rent_paid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textStyle="bold"
             android:layout_weight="1"
+            android:textColor="@color/colorDarkGreen"
             android:gravity="center">
         </TextView>
     </LinearLayout>

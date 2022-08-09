@@ -83,7 +83,7 @@ public class AddNewTenantFragment extends Fragment {
 
         final Bundle bundle = getArguments();
         if (bundle != null) {
-            tenantArrayList = bundle.getParcelableArrayList("arr");
+            tenantArrayList = bundle.getParcelableArrayList("tenant");
         }
 
 
@@ -150,10 +150,10 @@ public class AddNewTenantFragment extends Fragment {
 
 
                 if (etPassport.getText().toString().equals("")) {
-                    etPassport.setHint("Please enter tenant's passport number");
+                    etPassport.setHint("Please enter tenant ID number");
                     etPassport.setHintTextColor(getResources().getColor(R.color.colorRed));
                 } else if (etFullName.getText().toString().equals("")) {
-                    etFullName.setHint("Please enter tenant's full name");
+                    etFullName.setHint("Please enter tenant full name");
                     etFullName.setHintTextColor(getResources().getColor(R.color.colorRed));
                 } else if (etCheckIn.getText().toString().equals("")) {
                     etCheckIn.setHint("Move In");
@@ -162,17 +162,17 @@ public class AddNewTenantFragment extends Fragment {
                     etCheckOut.setHint("Move Out");
                     etCheckOut.setHintTextColor(getResources().getColor(R.color.colorRed));
                 }else if (etProfession.getText().toString().equals("")) {
-                    etProfession.setHint("Please enter tenant's profession");
+                    etProfession.setHint("Please enter tenant occupation");
                     etProfession.setHintTextColor(getResources().getColor(R.color.colorRed));
                 }else if (etPhoneNumber.getText().toString().equals("")) {
-                    etPhoneNumber.setHint("Please enter tenant's phone number");
+                    etPhoneNumber.setHint("Please enter tenant phone number");
                     etPhoneNumber.setHintTextColor(getResources().getColor(R.color.colorRed));
                 }else if (etDepositPaid.getText().toString().equals("")) {
                     etDepositPaid.setHint("Please enter deposit paid");
                     etDepositPaid.setHintTextColor(getResources().getColor(R.color.colorRed));
                 }
                 else if (tenantArrayList == null) {
-                    tenantArrayList = new ArrayList<>();
+                  //  tenantArrayList = new ArrayList<>();
                     tenantArrayList.add(tenant);
                     saveData();
                 }
@@ -270,7 +270,7 @@ public class AddNewTenantFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(tenantArrayList);
-        editor.putString("tenant", json);
+        editor.putString("newTenant", json);
         editor.apply();
         Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
@@ -297,7 +297,7 @@ public class AddNewTenantFragment extends Fragment {
     private void callHomeFragment()
     {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("arr", tenantArrayList);
+        bundle.putParcelableArrayList("tenant", tenantArrayList);
         android.app.Fragment fr = new HomeFragment();
         FragmentManager fm = getFragmentManager();
         fr.setArguments(bundle);

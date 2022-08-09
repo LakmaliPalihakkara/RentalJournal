@@ -67,9 +67,23 @@ public class TenantsInformationFragment extends Fragment {
         btClose = (Button) rootView.findViewById(R.id.bt_close);
         svSearch = (SearchView) rootView.findViewById(R.id.sv_search);
 
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//            SharedPreferences mobilePreference = getContext().getSharedPreferences("shared preferences", getContext().MODE_PRIVATE);
+//            mobilePreference.edit().remove("tenant").commit();
+//        }
+
         loadData();
 
         buildRecyclerView();
+
+        final Bundle bundle = getArguments();
+        if (bundle != null) {
+            tenantArrayList = bundle.getParcelableArrayList("tenant");
+
+
+        }
+
+
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            searchAdapter = new ArrayAdapter<Tenant>(getContext(), R.layout.search_list_item, R.id.textview,tenantArrayList);
@@ -112,8 +126,12 @@ public class TenantsInformationFragment extends Fragment {
         btClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("tenant", tenantArrayList);
+
                 Fragment fr = new HomeFragment();
                 FragmentManager fm = getFragmentManager();
+                fr.setArguments(bundle);
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.container, fr);
                 fragmentTransaction.commit();
@@ -140,7 +158,7 @@ public class TenantsInformationFragment extends Fragment {
                     public void onClickView(View view, int position) {
                         Bundle bundle = new Bundle();
                         bundle.putInt("position",position);
-                        bundle.putParcelableArrayList("arr",tenantArrayList);
+                        bundle.putParcelableArrayList("tenant",tenantArrayList);
 
                         Fragment fr = new TenantDetailsFragment();
                         FragmentManager fm = getFragmentManager();
@@ -183,10 +201,11 @@ public class TenantsInformationFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             Gson gson = new Gson();
-            String json = sharedPreferences.getString("tenant", null);
+            String json = sharedPreferences.getString("newTenant", null);
             Type type = new TypeToken<ArrayList<Tenant>>() {
             }.getType();
             tenantArrayList = gson.fromJson(json, type);
+
 
             }
 

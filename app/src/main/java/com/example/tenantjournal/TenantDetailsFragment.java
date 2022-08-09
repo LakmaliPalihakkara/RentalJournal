@@ -60,24 +60,23 @@ public class TenantDetailsFragment extends Fragment {
         final Bundle bundle = getArguments();
         if (bundle != null) {
             position = bundle.getInt("position");
-            tenantArrayList = bundle.getParcelableArrayList("arr");
-        }
+            tenantArrayList = bundle.getParcelableArrayList("tenant");
 
-        for(int i=0; i<tenantArrayList.size(); i++)
-        {
-            if(i == position)
-            {
-                tvTenantIdNumberValue.setText(tenantArrayList.get(i).getPassport());
-                tvTenantFullNameValue.setText(tenantArrayList.get(i).getFullName());
-                tvOccupationValue.setText(tenantArrayList.get(i).getProfession());
-                tvPhoneNumberValue.setText(tenantArrayList.get(i).getPhoneNumber());
-                tvMoveInValue.setText(tenantArrayList.get(i).getCheckInDate());
-                tvMoveOutValue.setText(tenantArrayList.get(i).getCheckOutDate());
-               // tvTotalRentalFeePaidValue.setText(tenantArrayList.get(i).getFullName());
-                tvDepositIncludedValue.setText(tenantArrayList.get(i).getDepositPaid());
-               // tvRemainingRentalFeeValue.setText(tenantArrayList.get(i).getFullName());
-               // tvRemainingDamagePaymentValue.setText(tenantArrayList.get(i).getFullName());
-                //tvOutstandingBalanceValue.setText(tenantArrayList.get(i).getFullName());
+
+            for (int i = 0; i < tenantArrayList.size(); i++) {
+                if (i == position) {
+                    tvTenantIdNumberValue.setText(tenantArrayList.get(i).getPassport());
+                    tvTenantFullNameValue.setText(tenantArrayList.get(i).getFullName());
+                    tvOccupationValue.setText(tenantArrayList.get(i).getProfession());
+                    tvPhoneNumberValue.setText(tenantArrayList.get(i).getPhoneNumber());
+                    tvMoveInValue.setText(tenantArrayList.get(i).getCheckInDate());
+                    tvMoveOutValue.setText(tenantArrayList.get(i).getCheckOutDate());
+                    // tvTotalRentalFeePaidValue.setText(tenantArrayList.get(i).getFullName());
+                    tvDepositIncludedValue.setText(tenantArrayList.get(i).getDepositPaid());
+                    // tvRemainingRentalFeeValue.setText(tenantArrayList.get(i).getFullName());
+                    // tvRemainingDamagePaymentValue.setText(tenantArrayList.get(i).getFullName());
+                    //tvOutstandingBalanceValue.setText(tenantArrayList.get(i).getFullName());
+                }
             }
         }
 
