@@ -113,7 +113,7 @@
             android:id="@+id/tv_deposit_paid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profession"
+            android:text="@string/deposit_paid"
             android:layout_margin="35dp"
             android:textColor="@color/colorBlack"
             android:textSize="18dp"

@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tenantjournal.Adapter.AddNewTenantAdapter;
 import com.example.tenantjournal.Adapter.TenantInformationAdapter;
+import com.example.tenantjournal.Model.NewPayment;
 import com.example.tenantjournal.Model.Tenant;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,15 +42,15 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class HomeFragment extends Fragment {
 
-    private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
+    private ArrayList<NewPayment> tenantArrayList = new ArrayList<NewPayment>();
 
     AddNewTenantAdapter addNewTenantAdapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     Button btNewTenant, btViewTenant, btTenantPayment;
-    ListView arrayList;
-    Tenant tenant;
-    ArrayAdapter<Tenant> adapterNames;
+    //ListView arrayList;
+//    Tenant tenant;
+//    ArrayAdapter<Tenant> adapterNames;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -63,7 +64,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
-        arrayList = (ListView) rootView.findViewById(R.id.lv_tenant);
+     //   arrayList = (ListView) rootView.findViewById(R.id.lv_tenant);
         btNewTenant = (Button) rootView.findViewById(R.id.bt_new_tenant);
         btViewTenant = (Button) rootView.findViewById(R.id.bt_view_tenant);
         btTenantPayment = (Button) rootView.findViewById(R.id.bt_tenant_payment);
@@ -73,6 +74,7 @@ public class HomeFragment extends Fragment {
 //            SharedPreferences mobilePreference = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
 //            mobilePreference.edit().remove("courses").commit();
 //        }
+
 
         loadData();
         buildRecyclerView();
@@ -141,7 +143,16 @@ public class HomeFragment extends Fragment {
         btTenantPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callFragment(new TenantPaymentFragment());
+                Bundle bundle1 = new Bundle();
+                bundle1.putParcelableArrayList("arr",tenantArrayList);
+
+
+                Fragment fr = new TenantPaymentFragment();
+                FragmentManager fm = getFragmentManager();
+                fr.setArguments(bundle1);
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fr);
+                fragmentTransaction.commit();
             }
         });
 
@@ -185,8 +196,8 @@ public class HomeFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             Gson gson = new Gson();
-            String json = sharedPreferences.getString("tenant", null);
-            Type type = new TypeToken<ArrayList<Tenant>>() {
+            String json = sharedPreferences.getString("newPayment", null);
+            Type type = new TypeToken<ArrayList<NewPayment>>() {
             }.getType();
 
 
@@ -197,7 +208,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void saveData(ArrayList<Tenant> tenantArrayList2) {
+    private void saveData(ArrayList<NewPayment> tenantArrayList2) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();

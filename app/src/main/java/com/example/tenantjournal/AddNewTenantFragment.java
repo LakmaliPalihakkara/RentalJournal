@@ -10,31 +10,20 @@ import android.os.Bundle;
 import android.app.Fragment;
 
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.tenantjournal.Adapter.TenantInformationAdapter;
-import com.example.tenantjournal.Model.NewTenant;
 import com.example.tenantjournal.Model.Tenant;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -158,19 +147,46 @@ public class AddNewTenantFragment extends Fragment {
                             isSigned
                     );
 
-                if (tenantArrayList == null) {
-                tenantArrayList = new ArrayList<>();
+
+
+                if (etPassport.getText().toString().equals("")) {
+                    etPassport.setHint("Please enter tenant's passport number");
+                    etPassport.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etFullName.getText().toString().equals("")) {
+                    etFullName.setHint("Please enter tenant's full name");
+                    etFullName.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etCheckIn.getText().toString().equals("")) {
+                    etCheckIn.setHint("Move In");
+                    etCheckIn.setHintTextColor(getResources().getColor(R.color.colorRed));
+                }else if (etCheckOut.getText().toString().equals("")) {
+                    etCheckOut.setHint("Move Out");
+                    etCheckOut.setHintTextColor(getResources().getColor(R.color.colorRed));
+                }else if (etProfession.getText().toString().equals("")) {
+                    etProfession.setHint("Please enter tenant's profession");
+                    etProfession.setHintTextColor(getResources().getColor(R.color.colorRed));
+                }else if (etPhoneNumber.getText().toString().equals("")) {
+                    etPhoneNumber.setHint("Please enter tenant's phone number");
+                    etPhoneNumber.setHintTextColor(getResources().getColor(R.color.colorRed));
+                }else if (etDepositPaid.getText().toString().equals("")) {
+                    etDepositPaid.setHint("Please enter deposit paid");
+                    etDepositPaid.setHintTextColor(getResources().getColor(R.color.colorRed));
+                }
+                else if (tenantArrayList == null) {
+                    tenantArrayList = new ArrayList<>();
                     tenantArrayList.add(tenant);
-            } else
+                    saveData();
+                }
+                else
                     {
 
 
                         tenantArrayList.add(tenant);
+                        saveData();
                     }
 
 
 
-                saveData();
+
             }
         });
 

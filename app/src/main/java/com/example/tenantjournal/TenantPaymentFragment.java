@@ -20,8 +20,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tenantjournal.Model.NewPayment;
+import com.example.tenantjournal.Model.Tenant;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -36,6 +38,7 @@ public class TenantPaymentFragment extends Fragment {
     Button btPaymentSave, btClose;
     DatePickerDialog datePicker;
 
+    private ArrayList<NewPayment> tenantArrayList = new ArrayList<NewPayment>();
     NewPayment newPaymentObj;
 
     public TenantPaymentFragment() {
@@ -82,15 +85,28 @@ public class TenantPaymentFragment extends Fragment {
             }
         });
 
+        final Bundle bundle = getArguments();
+        if (bundle != null) {
+            tenantArrayList = bundle.getParcelableArrayList("arr");
+        }
+
         return rootView;
     }
 
     private void validation()
     {
 
+        newPaymentObj = new NewPayment(etTenantName.getText().toString(),
+                etPropertyName.getText().toString(),
+                etPaymentDate.getText().toString(),
+                etProfession.getText().toString(),
+                etRentalFeePaid.getText().toString(),
+                etDamagePayment.getText().toString());
+
+
         if(etTenantName.getText().toString().equals("")){
 
-            etTenantName.setHint("Please enter tenant name");
+            etTenantName.setHint("Please enter tenant's name");
             etTenantName.setHintTextColor(getResources().getColor(R.color.colorRed));
 
         }
@@ -121,32 +137,39 @@ public class TenantPaymentFragment extends Fragment {
             etRentalFeePaid.setHint("Please enter damage payment");
             etRentalFeePaid.setHintTextColor(getResources().getColor(R.color.colorRed));
         }
-        else
-        {
-            saveData();
 
+        else if (tenantArrayList == null) {
+            tenantArrayList = new ArrayList<>();
+            tenantArrayList.add(newPaymentObj);
+            saveData();
             callHomeFragment();
 
         }
+        else
+        {
+            tenantArrayList.add(newPaymentObj);
+            saveData();
+            callHomeFragment();
+
+        }
+
+
+
     }
 
     private void saveData() {
 
-        newPaymentObj = new NewPayment(etTenantName.getText().toString(),
-                etPropertyName.getText().toString(),
-                etPaymentDate.getText().toString(),
-                etProfession.getText().toString(),
-                etRentalFeePaid.getText().toString(),
-                etDamagePayment.getText().toString());
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             Gson gson = new Gson();
-            String json = gson.toJson(newPaymentObj);
+            String json = gson.toJson(tenantArrayList);
             editor.putString("newPayment", json);
             editor.apply();
           //  Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -173,8 +196,11 @@ public class TenantPaymentFragment extends Fragment {
 
     private void callHomeFragment()
     {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("arr", tenantArrayList);
         android.app.Fragment fr = new HomeFragment();
         FragmentManager fm = getFragmentManager();
+        fr.setArguments(bundle);
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.container, fr);
         fragmentTransaction.commit();

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.tenantjournal.Model.NewPayment;
 import com.example.tenantjournal.Model.Tenant;
 import com.example.tenantjournal.R;
 
@@ -14,12 +15,12 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AddNewTenantAdapter extends RecyclerView.Adapter<AddNewTenantAdapter.ViewHolder> {
-    private ArrayList<Tenant> mData;
+    private ArrayList<NewPayment> mData;
     private LayoutInflater mInflater;
     private TenantInformationAdapter.ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public AddNewTenantAdapter(Context context, ArrayList<Tenant> data) {
+    public AddNewTenantAdapter(Context context, ArrayList<NewPayment> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -35,8 +36,10 @@ public class AddNewTenantAdapter extends RecyclerView.Adapter<AddNewTenantAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Tenant tenant = mData.get(position);
-        holder.myTextView.setText(tenant.getFullName());
+        NewPayment tenant = mData.get(position);
+        holder.tvName.setText(tenant.getTenantName());
+        holder.tvDate.setText(tenant.getPaymentDate());
+        holder.tvRentPaid.setText(tenant.getRentalFeePaid());
     }
 
     // total number of rows
@@ -48,11 +51,13 @@ public class AddNewTenantAdapter extends RecyclerView.Adapter<AddNewTenantAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        TextView tvName, tvDate, tvRentPaid;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.textview);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvDate = itemView.findViewById(R.id.tv_date);
+            tvRentPaid = itemView.findViewById(R.id.tv_rent_paid);
             itemView.setOnClickListener(this);
         }
 

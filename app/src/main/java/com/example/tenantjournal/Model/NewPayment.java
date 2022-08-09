@@ -1,6 +1,9 @@
 package com.example.tenantjournal.Model;
 
-public class NewPayment {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class NewPayment implements Parcelable {
     String tenantName;
     String propertyName;
     String paymentDate;
@@ -16,6 +19,27 @@ public class NewPayment {
         this.rentalFeePaid = rentalFeePaid;
         this.damagePayment = damagePayment;
     }
+
+    protected NewPayment(Parcel in) {
+        tenantName = in.readString();
+        propertyName = in.readString();
+        paymentDate = in.readString();
+        profession = in.readString();
+        rentalFeePaid = in.readString();
+        damagePayment = in.readString();
+    }
+
+    public static final Creator<NewPayment> CREATOR = new Creator<NewPayment>() {
+        @Override
+        public NewPayment createFromParcel(Parcel in) {
+            return new NewPayment(in);
+        }
+
+        @Override
+        public NewPayment[] newArray(int size) {
+            return new NewPayment[size];
+        }
+    };
 
     public String getTenantName() {
         return tenantName;
@@ -63,5 +87,20 @@ public class NewPayment {
 
     public void setDamagePayment(String damagePayment) {
         this.damagePayment = damagePayment;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(tenantName);
+        parcel.writeString(propertyName);
+        parcel.writeString(paymentDate);
+        parcel.writeString(profession);
+        parcel.writeString(rentalFeePaid);
+        parcel.writeString(damagePayment);
     }
 }
