@@ -38,9 +38,10 @@ public class LoginFragment extends Fragment {
     TextView tvSignUp;
 
     String username, email, password;
+    Landlord landlord;
 
  //   NewTenant newTenant;
-    private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
+ //   private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
 
     public LoginFragment() {
         // Required empty public constructor
@@ -84,13 +85,15 @@ public class LoginFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             Gson gson = new Gson();
-            String json = sharedPreferences.getString("newTenant", null);
-            Type type = new TypeToken<ArrayList<Landlord>>() {
-            }.getType();
-            newTenantArrayList = gson.fromJson(json, type);
+//            String json = sharedPreferences.getString("newTenant", null);
+//            Type type = new TypeToken<Landlord>() {
+//            }.getType();
+           // newTenantArrayList = gson.fromJson(json, type);
+            String json = sharedPreferences.getString("newTenant1", "");
+            landlord = gson.fromJson(json, Landlord.class);
 
-            if(newTenantArrayList != null) {
-                for (int i = 0; i < newTenantArrayList.size(); i++) {
+            if(landlord != null) {
+           //     for (int i = 0; i < newTenantArrayList.size(); i++) {
                     //   username = newTenantArrayList.get(i).getUsername();
                     //    email = newTenantArrayList.get(i).getEmail();
                     //     password = newTenantArrayList.get(i).getPassword();
@@ -104,20 +107,20 @@ public class LoginFragment extends Fragment {
                     } else if (etPassword.getText().toString().equals("")) {
                         etPassword.setHint("Please enter your password");
                         etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
-                    } else if ((!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername())) || (!etUsername.getText().toString().equals(newTenantArrayList.get(i).getUsername()))) {
+                    } else if ((!etUsername.getText().toString().equals(landlord.getUsername())) || (!etUsername.getText().toString().equals(landlord.getUsername()))) {
                         etUsername.setText("");
 
                         etUsername.setHint("Incorrect username or email");
                         etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
 
-                    } else if (!etPassword.getText().toString().equals(newTenantArrayList.get(i).getPassword())) {
+                    } else if (!etPassword.getText().toString().equals(landlord.getPassword())) {
                         etPassword.setText("");
 
                         etPassword.setHint("Incorrect password");
                         etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
                     } else {
                         Bundle bundle = new Bundle();
-                        bundle.putString("name",newTenantArrayList.get(i).getUsername());
+                        bundle.putString("name",landlord.getUsername());
                         Fragment fr = new HomeFragment();
                         FragmentManager fm = getFragmentManager();
                         fr.setArguments(bundle);
@@ -126,9 +129,9 @@ public class LoginFragment extends Fragment {
                         fragmentTransaction.commit();
                     }
 
-                    System.out.println(newTenantArrayList.get(i).getUsername());
+                    System.out.println(landlord.getUsername());
 
-                }
+            //    }
             }
             else{
                 Toast.makeText(getContext(), "User not available", Toast.LENGTH_SHORT).show();

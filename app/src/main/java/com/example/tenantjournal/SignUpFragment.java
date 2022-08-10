@@ -36,7 +36,7 @@ public class SignUpFragment extends Fragment {
     TextView tvLogin;
 
   //  NewTenant newTenantObj;
-    private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
+ //   private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -148,19 +148,23 @@ public class SignUpFragment extends Fragment {
     private void saveData() {
 
 
-            newTenantArrayList.add(new Landlord(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
+          //  newTenantArrayList.add(new Landlord(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
 
+        Landlord landlord = new Landlord(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             Gson gson = new Gson();
-            String json = gson.toJson(newTenantArrayList);
-            editor.putString("newTenant", json);
-            editor.apply();
+//            String json = gson.toJson(landlord);
+//            editor.putString("newTenant", json);
+//            editor.apply();
+
+            String json = gson.toJson(landlord);
+            editor.putString("newTenant1", json);
+            editor.commit();
             Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
 
-        System.out.println(newTenantArrayList.size());
     }
 }
