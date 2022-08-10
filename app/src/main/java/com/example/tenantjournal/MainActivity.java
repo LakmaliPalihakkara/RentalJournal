@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         LoggedUser.getInstance().setContext(getApplicationContext());
 
-        Fragment fr = new HomeFragment();
+        Fragment fr = new LoginFragment();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.container, fr);

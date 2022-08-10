@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +26,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -41,7 +47,8 @@ public class HomeFragment extends Fragment {
     AddNewTenantAdapter addNewTenantAdapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
-    Button btNewTenant, btViewTenant, btTenantPayment;
+    Button btNewTenant, btViewTenant, btTenantPayment, btLogOut;
+    TextView tvHi, tvCurrentMonth;
     //ListView arrayList;
 //    Tenant tenant;
 //    ArrayAdapter<Tenant> adapterNames;
@@ -57,11 +64,14 @@ public class HomeFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        tvHi = (TextView) rootView.findViewById(R.id.tv_hi);
+        tvCurrentMonth = (TextView) rootView.findViewById(R.id.tv_current_month);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
      //   arrayList = (ListView) rootView.findViewById(R.id.lv_tenant);
         btNewTenant = (Button) rootView.findViewById(R.id.bt_new_tenant);
         btViewTenant = (Button) rootView.findViewById(R.id.bt_view_tenant);
         btTenantPayment = (Button) rootView.findViewById(R.id.bt_tenant_payment);
+        btLogOut =(Button) rootView.findViewById(R.id.bt_log_out);
 
 
 //        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -79,6 +89,8 @@ public class HomeFragment extends Fragment {
          //   tenant = bundle.getParcelable("tenant");
             paymentArrayList = bundle.getParcelableArrayList("payment");
             tenantArrayList = bundle.getParcelableArrayList("tenant");// Key
+
+            tvHi.setText("Hi "+bundle.getString("name"));
 
 
 
@@ -102,6 +114,9 @@ public class HomeFragment extends Fragment {
 
         }
 
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat month_date = new SimpleDateFormat("MMMM", Locale.US);
+        tvCurrentMonth.setText("Monthly Payment for "+month_date.format(cal.getTime()));
 
 
 
@@ -158,6 +173,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fr = new LoginFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fr);
+                fragmentTransaction.commit();
+            }
+        });
 
         return rootView;
     }

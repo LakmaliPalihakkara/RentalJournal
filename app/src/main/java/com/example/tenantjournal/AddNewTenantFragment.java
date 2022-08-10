@@ -32,9 +32,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AddNewTenantFragment extends Fragment {
 
-    Button btSave,btClose;
+    Button btSave, btClose;
     DatePickerDialog datePicker;
-    EditText etPassport, etFullName,etCheckIn,etCheckOut,etProfession, etPhoneNumber, etDepositPaid;
+    EditText etPassport, etFullName, etCheckIn, etCheckOut, etProfession, etPhoneNumber, etDepositPaid;
     RadioGroup rgGender;
     RadioButton rbMale, rbFemale;
     CheckBox cbSigned;
@@ -78,14 +78,13 @@ public class AddNewTenantFragment extends Fragment {
         rbFemale = (RadioButton) rootView.findViewById(R.id.rb_female);
         cbSigned = (CheckBox) rootView.findViewById(R.id.cb_agreement_signed);
 
-     //   recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
+        //   recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
 
 
         final Bundle bundle = getArguments();
         if (bundle != null) {
             tenantArrayList = bundle.getParcelableArrayList("tenant");
         }
-
 
 
         etCheckIn.setInputType(InputType.TYPE_NULL);
@@ -117,8 +116,8 @@ public class AddNewTenantFragment extends Fragment {
 
         checkButton(rootView);
 
-      //  LoggedUser.getInstance().loadData(tenantArrayList);
-       // loadData();
+        //  LoggedUser.getInstance().loadData(tenantArrayList);
+        // loadData();
 
 //        Log.e("array", String.valueOf(tenantArrayList));
 //        buildRecyclerView();
@@ -136,6 +135,48 @@ public class AddNewTenantFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+                if (etPassport.getText().toString().equals("")) {
+                    etPassport.setHint("Please enter tenant ID number");
+                    etPassport.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etFullName.getText().toString().equals("")) {
+                    etFullName.setHint("Please enter tenant full name");
+                    etFullName.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etCheckIn.getText().toString().equals("")) {
+                    etCheckIn.setHint("Move In");
+                    etCheckIn.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etCheckOut.getText().toString().equals("")) {
+                    etCheckOut.setHint("Move Out");
+                    etCheckOut.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etProfession.getText().toString().equals("")) {
+                    etProfession.setHint("Please enter tenant occupation");
+                    etProfession.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etPhoneNumber.getText().toString().equals("")) {
+                    etPhoneNumber.setHint("Please enter tenant phone number");
+                    etPhoneNumber.setHintTextColor(getResources().getColor(R.color.colorRed));
+
+                } else if (etPhoneNumber.getText().toString().length() != 10) {
+                    etPhoneNumber.setText("");
+                    etPhoneNumber.setHint("Incorrect phone number");
+                    etPhoneNumber.setHintTextColor(getResources().getColor(R.color.colorRed));
+
+                } else if (etDepositPaid.getText().toString().equals("")) {
+                    etDepositPaid.setHint("Please enter deposit paid");
+                    etDepositPaid.setHintTextColor(getResources().getColor(R.color.colorRed));
+                }
+//                else if (tenantArrayList == null) {
+//                  //  tenantArrayList = new ArrayList<>();
+//                    tenantArrayList.add(tenant);
+//                    saveData();
+//                }
+                else {
+
+                    if (cbSigned.isChecked()) {
+                        isSigned = true;
+                    } else if (!cbSigned.isChecked()) {
+                        isSigned = false;
+                    }
+
                     tenant = new Tenant(etPassport.getText().toString(),
                             etFullName.getText().toString(),
                             etCheckIn.getText().toString(),
@@ -147,57 +188,28 @@ public class AddNewTenantFragment extends Fragment {
                             isSigned
                     );
 
-
-
-                if (etPassport.getText().toString().equals("")) {
-                    etPassport.setHint("Please enter tenant ID number");
-                    etPassport.setHintTextColor(getResources().getColor(R.color.colorRed));
-                } else if (etFullName.getText().toString().equals("")) {
-                    etFullName.setHint("Please enter tenant full name");
-                    etFullName.setHintTextColor(getResources().getColor(R.color.colorRed));
-                } else if (etCheckIn.getText().toString().equals("")) {
-                    etCheckIn.setHint("Move In");
-                    etCheckIn.setHintTextColor(getResources().getColor(R.color.colorRed));
-                }else if (etCheckOut.getText().toString().equals("")) {
-                    etCheckOut.setHint("Move Out");
-                    etCheckOut.setHintTextColor(getResources().getColor(R.color.colorRed));
-                }else if (etProfession.getText().toString().equals("")) {
-                    etProfession.setHint("Please enter tenant occupation");
-                    etProfession.setHintTextColor(getResources().getColor(R.color.colorRed));
-                }else if (etPhoneNumber.getText().toString().equals("")) {
-                    etPhoneNumber.setHint("Please enter tenant phone number");
-                    etPhoneNumber.setHintTextColor(getResources().getColor(R.color.colorRed));
-                }else if (etDepositPaid.getText().toString().equals("")) {
-                    etDepositPaid.setHint("Please enter deposit paid");
-                    etDepositPaid.setHintTextColor(getResources().getColor(R.color.colorRed));
-                }
-                else if (tenantArrayList == null) {
-                  //  tenantArrayList = new ArrayList<>();
-                    tenantArrayList.add(tenant);
-                    saveData();
-                }
-                else
+                    if(tenantArrayList == null)
                     {
-
-
+                        tenantArrayList = new ArrayList<>();
                         tenantArrayList.add(tenant);
                         saveData();
                     }
-
-
+                    else {
+                        tenantArrayList.add(tenant);
+                        saveData();
+                    }
+                }
 
 
             }
         });
 
 
-
         return rootView;
     }
 
 
-    public void setDate(final EditText editText)
-    {
+    public void setDate(final EditText editText) {
         final Calendar cldr = Calendar.getInstance();
         int day = cldr.get(Calendar.DAY_OF_MONTH);
         int month = cldr.get(Calendar.MONTH);
@@ -218,28 +230,25 @@ public class AddNewTenantFragment extends Fragment {
         datePicker.show();
     }
 
-    public void checkButton(View v){
+    public void checkButton(View v) {
         int radioId = rgGender.getCheckedRadioButtonId();
 
-      //  rbGender = v.findViewById(radioId);
+        //  rbGender = v.findViewById(radioId);
 
-        if(rbMale.isChecked())
-        {
+        if (rbMale.isChecked()) {
             gender = rbMale.getText().toString();
-        }
-        else
-        {
+        } else {
             gender = rbFemale.getText().toString();
         }
 
-        if(cbSigned.isChecked())
-        {
-            isSigned = true;
-        }
-        else
-        {
-            isSigned = false;
-        }
+//        if(cbSigned.isChecked())
+//        {
+//            isSigned = true;
+//        }
+//        else
+//        {
+//            isSigned = false;
+//        }
 
 
     }
@@ -263,16 +272,15 @@ public class AddNewTenantFragment extends Fragment {
 //    }
 
 
-
     private void saveData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(tenantArrayList);
-        editor.putString("newTenant", json);
-        editor.apply();
-        Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            Gson gson = new Gson();
+            String json = gson.toJson(tenantArrayList);
+            editor.putString("newTenant", json);
+            editor.apply();
+            Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
 
         callHomeFragment();
@@ -294,8 +302,7 @@ public class AddNewTenantFragment extends Fragment {
 //    }
 
 
-    private void callHomeFragment()
-    {
+    private void callHomeFragment() {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("tenant", tenantArrayList);
         android.app.Fragment fr = new HomeFragment();

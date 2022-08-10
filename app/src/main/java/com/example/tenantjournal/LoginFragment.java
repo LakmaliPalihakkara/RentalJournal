@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tenantjournal.Model.NewTenant;
-import com.example.tenantjournal.Model.Tenant;
+import com.example.tenantjournal.Model.Landlord;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -40,7 +40,7 @@ public class LoginFragment extends Fragment {
     String username, email, password;
 
  //   NewTenant newTenant;
-    private ArrayList<NewTenant> newTenantArrayList = new ArrayList<>();
+    private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
 
     public LoginFragment() {
         // Required empty public constructor
@@ -85,7 +85,7 @@ public class LoginFragment extends Fragment {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sharedPreferences.getString("newTenant", null);
-            Type type = new TypeToken<ArrayList<NewTenant>>() {
+            Type type = new TypeToken<ArrayList<Landlord>>() {
             }.getType();
             newTenantArrayList = gson.fromJson(json, type);
 
@@ -116,8 +116,11 @@ public class LoginFragment extends Fragment {
                         etPassword.setHint("Incorrect password");
                         etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
                     } else {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name",newTenantArrayList.get(i).getUsername());
                         Fragment fr = new HomeFragment();
                         FragmentManager fm = getFragmentManager();
+                        fr.setArguments(bundle);
                         FragmentTransaction fragmentTransaction = fm.beginTransaction();
                         fragmentTransaction.replace(R.id.container, fr);
                         fragmentTransaction.commit();

@@ -9,15 +9,16 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tenantjournal.Model.NewTenant;
-import com.example.tenantjournal.Model.Tenant;
+import com.example.tenantjournal.Model.Landlord;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -31,10 +32,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class SignUpFragment extends Fragment {
 
     EditText etUsername, etEmail, etPassword, etConfirmPassword;
-    Button btSave;
+    Button btSignUp;
+    TextView tvLogin;
 
   //  NewTenant newTenantObj;
-    private ArrayList<NewTenant> newTenantArrayList = new ArrayList<>();
+    private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -52,12 +54,24 @@ public class SignUpFragment extends Fragment {
         etEmail = view.findViewById(R.id.et_email);
         etPassword = view.findViewById(R.id.et_password);
         etConfirmPassword = view.findViewById(R.id.et_confirm_password);
-        btSave = view.findViewById(R.id.bt_save);
+        btSignUp = view.findViewById(R.id.bt_sign_up);
+        tvLogin = view.findViewById(R.id.tv_login);
 
-        btSave.setOnClickListener(new View.OnClickListener() {
+        btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                validation();
+            }
+        });
+
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fr = new LoginFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fr);
+                fragmentTransaction.commit();
             }
         });
 
@@ -76,6 +90,13 @@ public class SignUpFragment extends Fragment {
         else if (etEmail.getText().toString().equals(""))
         {
             etEmail.setHint("Please enter your email");
+            etEmail.setHintTextColor(getResources().getColor(R.color.colorRed));
+        }
+
+        else if(!isValidEmail(etEmail.getText().toString()))
+        {
+            etEmail.setText("");
+            etEmail.setHint("Please enter valid email");
             etEmail.setHintTextColor(getResources().getColor(R.color.colorRed));
         }
 
@@ -108,18 +129,26 @@ public class SignUpFragment extends Fragment {
         {
             saveData();
 
+            Bundle bundle = new Bundle();
+            bundle.putString("name",etUsername.getText().toString());
+
             Fragment fr = new HomeFragment();
             FragmentManager fm = getFragmentManager();
+            fr.setArguments(bundle);
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.container, fr);
             fragmentTransaction.commit();
         }
     }
 
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     private void saveData() {
 
 
-            newTenantArrayList.add(new NewTenant(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
+            newTenantArrayList.add(new Landlord(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

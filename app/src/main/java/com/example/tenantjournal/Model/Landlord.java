@@ -1,11 +1,11 @@
 package com.example.tenantjournal.Model;
 
-public class NewTenant {
+public class Landlord {
     String username;
     String email;
     String password;
 
-    public NewTenant(String username, String email, String password) {
+    public Landlord(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
