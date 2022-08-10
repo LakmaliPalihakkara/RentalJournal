@@ -41,6 +41,7 @@ public class AddNewTenantFragment extends Fragment {
     CheckBox cbSigned;
     boolean isEdit;
     int position;
+    String name;
 
     View rootView;
 
@@ -97,6 +98,7 @@ public class AddNewTenantFragment extends Fragment {
             tenantArrayList = bundle.getParcelableArrayList("tenant");
             isEdit = bundle.getBoolean("edit");
             position = bundle.getInt("position");
+            name = bundle.getString("name");
 
             if(isEdit)
             {
@@ -105,7 +107,7 @@ public class AddNewTenantFragment extends Fragment {
                         etPassport.setText(tenantArrayList.get(i).getPassport());
                         etFullName.setText(tenantArrayList.get(i).getFullName());
                         etCheckIn.setText(tenantArrayList.get(i).getCheckInDate());
-                        etCheckOut.setText(tenantArrayList.get(i).getCheckInDate());
+                        etCheckOut.setText(tenantArrayList.get(i).getCheckOutDate());
                         etProfession.setText(tenantArrayList.get(i).getProfession());
                         etPhoneNumber.setText(tenantArrayList.get(i).getPhoneNumber());
                         etDepositPaid.setText(tenantArrayList.get(i).getDepositPaid());
@@ -116,11 +118,9 @@ public class AddNewTenantFragment extends Fragment {
 
                         if(gender == "Male") {
                             rbMale.setChecked(true);
-                            rbFemale.setChecked(false);
                         } else
                         {
                             rbFemale.setChecked(true);
-                            rbMale.setChecked(false);
                         }
 
                         if(isSigned)
@@ -132,7 +132,7 @@ public class AddNewTenantFragment extends Fragment {
                             cbSigned.setChecked(false);
                         }
 
-                        tenantArrayList.remove(position);
+
 
                         isEdit = false;
                     }
@@ -191,6 +191,8 @@ public class AddNewTenantFragment extends Fragment {
             public void onClick(View v) {
 
                // checkButton(rootView);
+
+                tenantArrayList.remove(position);
 
                 if (etPassport.getText().toString().equals("")) {
                     etPassport.setHint("Please enter tenant ID number");
@@ -424,6 +426,8 @@ public class AddNewTenantFragment extends Fragment {
     private void callHomeFragment() {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("tenant", tenantArrayList);
+        bundle.putString("name", name);
+
         android.app.Fragment fr = new HomeFragment();
         FragmentManager fm = getFragmentManager();
         fr.setArguments(bundle);

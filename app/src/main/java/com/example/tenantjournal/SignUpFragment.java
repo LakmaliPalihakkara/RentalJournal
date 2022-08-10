@@ -127,6 +127,14 @@ public class SignUpFragment extends Fragment {
         }
         else
         {
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences mobilePreference = getContext().getSharedPreferences("shared preferences", getContext().MODE_PRIVATE);
+                mobilePreference.edit().remove("newPayment").commit();
+                mobilePreference.edit().remove("newTenant1").commit();
+                mobilePreference.edit().remove("newTenant").commit();
+            }
+
             saveData();
 
             Bundle bundle = new Bundle();
@@ -163,7 +171,7 @@ public class SignUpFragment extends Fragment {
             String json = gson.toJson(landlord);
             editor.putString("newTenant1", json);
             editor.commit();
-            Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
 
     }

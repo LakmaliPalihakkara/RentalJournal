@@ -28,6 +28,7 @@ public class TenantDetailsFragment extends Fragment {
             tvMoveOutValue, tvTotalRentalFeePaidValue;
 
     int position;
+    String name;
     private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
     Button btPersonalInfoEdit, btClose;
 
@@ -62,6 +63,8 @@ public class TenantDetailsFragment extends Fragment {
         if (bundle != null) {
             position = bundle.getInt("position");
             tenantArrayList = bundle.getParcelableArrayList("tenant");
+            name = bundle.getString("name");
+
 
 
             for (int i = 0; i < tenantArrayList.size(); i++) {
@@ -103,8 +106,12 @@ public class TenantDetailsFragment extends Fragment {
         btClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+
                 Fragment fr = new TenantsInformationFragment();
                 FragmentManager fm = getFragmentManager();
+                fr.setArguments(bundle);
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.container, fr);
                 fragmentTransaction.commit();

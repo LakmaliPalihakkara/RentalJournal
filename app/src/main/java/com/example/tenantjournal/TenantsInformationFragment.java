@@ -42,6 +42,7 @@ public class TenantsInformationFragment extends Fragment {
     private EditText etSearch;
     private ArrayAdapter<String> searchAdapter;
     Button btClose;
+    String name;
 
     TenantInformationAdapter tenantInformationAdapter;
     RecyclerView recyclerView;
@@ -79,6 +80,7 @@ public class TenantsInformationFragment extends Fragment {
         final Bundle bundle = getArguments();
         if (bundle != null) {
             tenantArrayList = bundle.getParcelableArrayList("tenant");
+            name = bundle.getString("name");
 
 
 
@@ -130,6 +132,7 @@ public class TenantsInformationFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("tenant", tenantArrayList);
+                bundle.putString("name", name);
 
                 Fragment fr = new HomeFragment();
                 FragmentManager fm = getFragmentManager();
@@ -161,6 +164,7 @@ public class TenantsInformationFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putInt("position",position);
                         bundle.putParcelableArrayList("tenant",tenantArrayList);
+                        bundle.putString("name", name);
 
                         Fragment fr = new TenantDetailsFragment();
                         FragmentManager fm = getFragmentManager();

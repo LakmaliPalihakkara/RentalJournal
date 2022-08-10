@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     Button btNewTenant, btViewTenant, btTenantPayment, btLogOut;
     TextView tvHi, tvCurrentMonth;
+    String name;
     //ListView arrayList;
 //    Tenant tenant;
 //    ArrayAdapter<Tenant> adapterNames;
@@ -75,8 +76,10 @@ public class HomeFragment extends Fragment {
 
 
 //        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//            SharedPreferences mobilePreference = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
-//            mobilePreference.edit().remove("courses").commit();
+//            SharedPreferences mobilePreference = getContext().getSharedPreferences("shared preferences", getContext().MODE_PRIVATE);
+//            mobilePreference.edit().remove("newPayment").commit();
+//            mobilePreference.edit().remove("newTenant1").commit();
+//            mobilePreference.edit().remove("newTenant").commit();
 //        }
 
 
@@ -89,8 +92,9 @@ public class HomeFragment extends Fragment {
          //   tenant = bundle.getParcelable("tenant");
             paymentArrayList = bundle.getParcelableArrayList("payment");
         //    tenantArrayList = bundle.getParcelableArrayList("tenant");// Key
+            name = bundle.getString("name");
 
-            tvHi.setText("Hi "+bundle.getString("name"));
+            tvHi.setText("Hi "+ name);
 
 
 
@@ -131,6 +135,7 @@ public class HomeFragment extends Fragment {
 
                 Bundle bundle1 = new Bundle();
                 bundle1.putParcelableArrayList("tenant", tenantArrayList);
+                bundle1.putString("name", name);
 
 
                 Fragment fr = new AddNewTenantFragment();
@@ -148,6 +153,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle1 = new Bundle();
                 bundle1.putParcelableArrayList("tenant", tenantArrayList);
+                bundle1.putString("name", name);
 
                 Fragment fr = new TenantsInformationFragment();
                 FragmentManager fm = getFragmentManager();
@@ -163,6 +169,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle1 = new Bundle();
                 bundle1.putParcelableArrayList("payment", paymentArrayList);
+                bundle1.putString("name", name);
 
                 Fragment fr = new TenantPaymentFragment();
                 FragmentManager fm = getFragmentManager();
@@ -256,7 +263,7 @@ public class HomeFragment extends Fragment {
             String json = gson.toJson(tenantArrayList2);
             editor.putString("tenant", json);
             editor.apply();
-            Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(), "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
 
     }

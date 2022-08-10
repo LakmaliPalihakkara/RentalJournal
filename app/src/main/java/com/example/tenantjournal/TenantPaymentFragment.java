@@ -34,13 +34,13 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class TenantPaymentFragment extends Fragment {
 
-    EditText etTenantName, etPropertyName,etPaymentDate,etProfession, etDepositPaid,etRentalFeePaid, etDamagePayment;
+    EditText etTenantName, etPropertyName,etPaymentDate, etDepositPaid,etRentalFeePaid, etDamagePayment;
     Button btPaymentSave, btClose;
     DatePickerDialog datePicker;
-    int totalPaidRent;
 
     private ArrayList<NewPayment> tenantArrayList = new ArrayList<NewPayment>();
     NewPayment newPaymentObj;
+    String name;
 
     public TenantPaymentFragment() {
         // Required empty public constructor
@@ -57,7 +57,6 @@ public class TenantPaymentFragment extends Fragment {
         etPropertyName = (EditText) rootView.findViewById(R.id.et_property_name);
         etPaymentDate = (EditText) rootView.findViewById(R.id.et_payment_date);
         etDepositPaid = (EditText) rootView.findViewById(R.id.et_deposit_paid);
-        etProfession = (EditText) rootView.findViewById(R.id.et_profession);
         etRentalFeePaid = (EditText) rootView.findViewById(R.id.et_rental_fee_paid);
         etDamagePayment = (EditText) rootView.findViewById(R.id.et_damage_payment);
         btPaymentSave = (Button) rootView.findViewById(R.id.bt_payment_save);
@@ -89,6 +88,7 @@ public class TenantPaymentFragment extends Fragment {
         final Bundle bundle = getArguments();
         if (bundle != null) {
             tenantArrayList = bundle.getParcelableArrayList("payment");
+            name = bundle.getString("name");
         }
 
         return rootView;
@@ -100,8 +100,7 @@ public class TenantPaymentFragment extends Fragment {
         newPaymentObj = new NewPayment(etTenantName.getText().toString(),
                 etPropertyName.getText().toString(),
                 etPaymentDate.getText().toString(),
-                etProfession.getText().toString(),
-                String.valueOf(totalPaidRent),
+                etDepositPaid.getText().toString(),
                 etDamagePayment.getText().toString());
 
 
@@ -121,12 +120,6 @@ public class TenantPaymentFragment extends Fragment {
         {
             etPaymentDate.setHint("Please enter payment date");
             etPaymentDate.setHintTextColor(getResources().getColor(R.color.colorRed));
-        }
-
-        else if (etProfession.getText().toString().equals(""))
-        {
-            etProfession.setHint("Please enter profession");
-            etProfession.setHintTextColor(getResources().getColor(R.color.colorRed));
         }
         else if (etRentalFeePaid.getText().toString().equals(""))
         {
@@ -199,6 +192,8 @@ public class TenantPaymentFragment extends Fragment {
     {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("payment", tenantArrayList);
+        bundle.putString("name", name);
+
         android.app.Fragment fr = new HomeFragment();
         FragmentManager fm = getFragmentManager();
         fr.setArguments(bundle);

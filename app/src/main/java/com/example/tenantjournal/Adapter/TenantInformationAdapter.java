@@ -1,6 +1,8 @@
 package com.example.tenantjournal.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -98,11 +100,24 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
            btnDelete.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
-                   mData.remove(getAdapterPosition());
-                   notifyItemRemoved(getAdapterPosition());
-                   notifyItemRangeChanged(getAdapterPosition(),mData.size());
 
-                   saveData();
+                   new AlertDialog.Builder(context)
+                           .setTitle("Confirm")
+                           .setMessage("Do you really want to delete "+ mData.get(getAbsoluteAdapterPosition()).getFullName()+"?")
+                           .setIcon(android.R.drawable.ic_dialog_alert)
+                           .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                               public void onClick(DialogInterface dialog, int whichButton) {
+                                   mData.remove(getAdapterPosition());
+                                   notifyItemRemoved(getAdapterPosition());
+                                   notifyItemRangeChanged(getAdapterPosition(),mData.size());
+
+                                   saveData();
+                               }})
+                           .setNegativeButton(android.R.string.no, null).show();
+
+
+
                    viewClickListener.onClickDelete(view,getAbsoluteAdapterPosition(), mData);
                }
            });

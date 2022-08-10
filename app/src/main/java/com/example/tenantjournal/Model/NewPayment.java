@@ -7,15 +7,13 @@ public class NewPayment implements Parcelable {
     String tenantName;
     String propertyName;
     String paymentDate;
-    String profession;
     String rentalFeePaid;
     String damagePayment;
 
-    public NewPayment(String tenantName, String propertyName, String paymentDate, String profession, String rentalFeePaid, String damagePayment) {
+    public NewPayment(String tenantName, String propertyName, String paymentDate, String rentalFeePaid, String damagePayment) {
         this.tenantName = tenantName;
         this.propertyName = propertyName;
         this.paymentDate = paymentDate;
-        this.profession = profession;
         this.rentalFeePaid = rentalFeePaid;
         this.damagePayment = damagePayment;
     }
@@ -24,7 +22,6 @@ public class NewPayment implements Parcelable {
         tenantName = in.readString();
         propertyName = in.readString();
         paymentDate = in.readString();
-        profession = in.readString();
         rentalFeePaid = in.readString();
         damagePayment = in.readString();
     }
@@ -65,14 +62,6 @@ public class NewPayment implements Parcelable {
         this.paymentDate = paymentDate;
     }
 
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
-
     public String getRentalFeePaid() {
         return rentalFeePaid;
     }
@@ -99,7 +88,6 @@ public class NewPayment implements Parcelable {
         parcel.writeString(tenantName);
         parcel.writeString(propertyName);
         parcel.writeString(paymentDate);
-        parcel.writeString(profession);
         parcel.writeString(rentalFeePaid);
         parcel.writeString(damagePayment);
     }
