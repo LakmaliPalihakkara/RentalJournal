@@ -91,7 +91,7 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
            btnView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
-                   viewClickListener.onClickView(view, getAdapterPosition());
+                   viewClickListener.onClickView(view, getAbsoluteAdapterPosition());
                }
            });
 

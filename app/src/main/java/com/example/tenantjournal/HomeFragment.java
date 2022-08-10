@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
         if (bundle != null) {
          //   tenant = bundle.getParcelable("tenant");
             paymentArrayList = bundle.getParcelableArrayList("payment");
-            tenantArrayList = bundle.getParcelableArrayList("tenant");// Key
+        //    tenantArrayList = bundle.getParcelableArrayList("tenant");// Key
 
             tvHi.setText("Hi "+bundle.getString("name"));
 
@@ -230,6 +230,19 @@ public class HomeFragment extends Fragment {
 
                 paymentArrayList = gson.fromJson(json, type);
                 saveData(paymentArrayList);
+
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("newTenant", null);
+            Type type = new TypeToken<ArrayList<Tenant>>() {
+            }.getType();
+
+
+            tenantArrayList = gson.fromJson(json, type);
+          //  saveData(paymentArrayList);
 
         }
     }

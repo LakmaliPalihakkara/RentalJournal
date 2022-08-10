@@ -30,7 +30,7 @@
 
     <!--Add a New Tenant-->
     <string name="add_a_new_tenant">Add a New Tenant</string>
-    <string name="tenant_id_number">Tenant ID Number</string>
+    <string name="tenant_id_number">Tenant ID Number:</string>
     <string name="tenant_full_name">Tenant Full Name:</string>
     <string name="move_in">Move In:</string>
     <string name="move_out">Move Out:</string>

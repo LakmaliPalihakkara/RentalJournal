@@ -37,7 +37,12 @@ public class AddNewTenantFragment extends Fragment {
     EditText etPassport, etFullName, etCheckIn, etCheckOut, etProfession, etPhoneNumber, etDepositPaid;
     RadioGroup rgGender;
     RadioButton rbMale, rbFemale;
+    RadioButton selectedRadioButton;
     CheckBox cbSigned;
+    boolean isEdit;
+    int position;
+
+    View rootView;
 
     private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
 
@@ -60,7 +65,7 @@ public class AddNewTenantFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_add_new_tenant, container, false);
+     rootView = inflater.inflate(R.layout.fragment_add_new_tenant, container, false);
 
         btSave = (Button) rootView.findViewById(R.id.bt_save);
         btClose = (Button) rootView.findViewById(R.id.bt_close);
@@ -76,14 +81,64 @@ public class AddNewTenantFragment extends Fragment {
         rgGender = (RadioGroup) rootView.findViewById(R.id.rg_gender);
         rbMale = (RadioButton) rootView.findViewById(R.id.rb_male);
         rbFemale = (RadioButton) rootView.findViewById(R.id.rb_female);
+
+        int radioId = rgGender.getCheckedRadioButtonId();
+     //   rbMale = (RadioButton) rootView.findViewById(radioId);
+        //   rbFemale = (RadioButton) rootView.findViewById(radioId);
         cbSigned = (CheckBox) rootView.findViewById(R.id.cb_agreement_signed);
 
         //   recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
 
 
+
+
         final Bundle bundle = getArguments();
         if (bundle != null) {
             tenantArrayList = bundle.getParcelableArrayList("tenant");
+            isEdit = bundle.getBoolean("edit");
+            position = bundle.getInt("position");
+
+            if(isEdit)
+            {
+                for(int i=0; i<tenantArrayList.size(); i++) {
+                    if(position == i) {
+                        etPassport.setText(tenantArrayList.get(i).getPassport());
+                        etFullName.setText(tenantArrayList.get(i).getFullName());
+                        etCheckIn.setText(tenantArrayList.get(i).getCheckInDate());
+                        etCheckOut.setText(tenantArrayList.get(i).getCheckInDate());
+                        etProfession.setText(tenantArrayList.get(i).getProfession());
+                        etPhoneNumber.setText(tenantArrayList.get(i).getPhoneNumber());
+                        etDepositPaid.setText(tenantArrayList.get(i).getDepositPaid());
+                        gender = tenantArrayList.get(i).getGender();
+                        isSigned = tenantArrayList.get(i).getSigned();
+
+                        System.out.println("genderMale"+  gender );
+
+                        if(gender == "Male") {
+                            rbMale.setChecked(true);
+                            rbFemale.setChecked(false);
+                        } else
+                        {
+                            rbFemale.setChecked(true);
+                            rbMale.setChecked(false);
+                        }
+
+                        if(isSigned)
+                        {
+                            cbSigned.setChecked(true);
+                        }
+                        else
+                        {
+                            cbSigned.setChecked(false);
+                        }
+
+                        tenantArrayList.remove(position);
+
+                        isEdit = false;
+                    }
+                }
+
+            }
         }
 
 
@@ -114,7 +169,7 @@ public class AddNewTenantFragment extends Fragment {
             }
         });
 
-        checkButton(rootView);
+
 
         //  LoggedUser.getInstance().loadData(tenantArrayList);
         // loadData();
@@ -135,6 +190,7 @@ public class AddNewTenantFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+               // checkButton(rootView);
 
                 if (etPassport.getText().toString().equals("")) {
                     etPassport.setHint("Please enter tenant ID number");
@@ -171,11 +227,39 @@ public class AddNewTenantFragment extends Fragment {
 //                }
                 else {
 
+//                    rgGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                        @Override
+//                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//                            switch (i)
+//                            {
+//                                case R.id.rb_male:
+//                                    gender = "Male";
+//                                    break;
+//
+//                                case R.id.rb_female:
+//                                    gender = "Female";
+//                                    break;
+//                            }
+//                        }
+//                    });
+
+              //      checkButton();
+
+                    if (rbMale.isChecked()) {
+                        gender = "Male";
+                    } else {
+                        gender = "Female";
+                    }
+
+
+
                     if (cbSigned.isChecked()) {
                         isSigned = true;
                     } else if (!cbSigned.isChecked()) {
                         isSigned = false;
                     }
+
+                    System.out.println("genderclick"+gender);
 
                     tenant = new Tenant(etPassport.getText().toString(),
                             etFullName.getText().toString(),
@@ -187,6 +271,8 @@ public class AddNewTenantFragment extends Fragment {
                             etDepositPaid.getText().toString(),
                             isSigned
                     );
+
+                    System.out.println("genderMaleNew"+  gender );
 
                     if(tenantArrayList == null)
                     {
@@ -206,6 +292,25 @@ public class AddNewTenantFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.rb_male:
+                if (checked)
+                    // Pirates are the best
+                    gender = "Male";
+                    break;
+            case R.id.rb_female:
+                if (checked)
+                    // Ninjas rule
+                    gender = "Female";
+                    break;
+        }
     }
 
 
@@ -230,16 +335,30 @@ public class AddNewTenantFragment extends Fragment {
         datePicker.show();
     }
 
-    public void checkButton(View v) {
-        int radioId = rgGender.getCheckedRadioButtonId();
+    public void checkButton() {
+
+        int selectedRadioButtonId = rgGender.getCheckedRadioButtonId();
+//        selectedRadioButton = rgGender.findViewById(selectedRadioButtonId);
+//        gender = selectedRadioButton.getText().toString();
+
+        if (selectedRadioButtonId != -1) {
+            selectedRadioButton = rgGender.findViewById(selectedRadioButtonId);
+            String selectedRbText = selectedRadioButton.getText().toString();
+          //  textView.setText(selectedRbText + " is Selected");
+            gender = selectedRbText;
+//        } else {
+//          //  textView.setText("Nothing selected from the radio group");
+//            gender = selectedRbText;
+        }
+
 
         //  rbGender = v.findViewById(radioId);
 
-        if (rbMale.isChecked()) {
-            gender = rbMale.getText().toString();
-        } else {
-            gender = rbFemale.getText().toString();
-        }
+//        if (rbMale.isChecked()) {
+//            gender = rbMale.getText().toString();
+//        } else {
+//            gender = rbFemale.getText().toString();
+//        }
 
 //        if(cbSigned.isChecked())
 //        {

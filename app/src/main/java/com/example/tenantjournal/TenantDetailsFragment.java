@@ -25,11 +25,11 @@ import java.util.ArrayList;
 public class TenantDetailsFragment extends Fragment {
 
     TextView tvTenantIdNumberValue, tvTenantFullNameValue, tvOccupationValue, tvPhoneNumberValue, tvMoveInValue,
-            tvMoveOutValue, tvTotalRentalFeePaidValue, tvDepositIncludedValue, tvRemainingRentalFeeValue, tvRemainingDamagePaymentValue, tvOutstandingBalanceValue;
+            tvMoveOutValue, tvTotalRentalFeePaidValue;
 
     int position;
     private ArrayList<Tenant> tenantArrayList = new ArrayList<Tenant>();
-    Button btClose;
+    Button btPersonalInfoEdit, btClose;
 
     public TenantDetailsFragment() {
         // Required empty public constructor
@@ -50,11 +50,12 @@ public class TenantDetailsFragment extends Fragment {
         tvMoveInValue = (TextView) view.findViewById(R.id.tv_move_in_value);
         tvMoveOutValue = (TextView) view.findViewById(R.id.tv_move_out_value);
         tvTotalRentalFeePaidValue = (TextView) view.findViewById(R.id.tv_total_rental_fee_paid_value);
-        tvDepositIncludedValue = (TextView) view.findViewById(R.id.tv_deposit_included_value);
-        tvRemainingRentalFeeValue = (TextView) view.findViewById(R.id.tv_remaining_rental_fee_value);
-        tvRemainingDamagePaymentValue = (TextView) view.findViewById(R.id.tv_remaining_damage_payment_value);
-        tvOutstandingBalanceValue = (TextView) view.findViewById(R.id.tv_outstanding_balance);
+//        tvDepositIncludedValue = (TextView) view.findViewById(R.id.tv_deposit_included_value);
+//        tvRemainingRentalFeeValue = (TextView) view.findViewById(R.id.tv_remaining_rental_fee_value);
+//        tvRemainingDamagePaymentValue = (TextView) view.findViewById(R.id.tv_remaining_damage_payment_value);
+//        tvOutstandingBalanceValue = (TextView) view.findViewById(R.id.tv_outstanding_balance);
 
+        btPersonalInfoEdit = (Button) view.findViewById(R.id.bt_personal_info_edit);
         btClose = (Button) view.findViewById(R.id.bt_close);
 
         final Bundle bundle = getArguments();
@@ -71,14 +72,33 @@ public class TenantDetailsFragment extends Fragment {
                     tvPhoneNumberValue.setText(tenantArrayList.get(i).getPhoneNumber());
                     tvMoveInValue.setText(tenantArrayList.get(i).getCheckInDate());
                     tvMoveOutValue.setText(tenantArrayList.get(i).getCheckOutDate());
-                    // tvTotalRentalFeePaidValue.setText(tenantArrayList.get(i).getFullName());
-                    tvDepositIncludedValue.setText(tenantArrayList.get(i).getDepositPaid());
+                    tvTotalRentalFeePaidValue.setText(tenantArrayList.get(i).getDepositPaid());
+                //    tvDepositIncludedValue.setText(tenantArrayList.get(i).getDepositPaid());
                     // tvRemainingRentalFeeValue.setText(tenantArrayList.get(i).getFullName());
                     // tvRemainingDamagePaymentValue.setText(tenantArrayList.get(i).getFullName());
                     //tvOutstandingBalanceValue.setText(tenantArrayList.get(i).getFullName());
                 }
             }
         }
+
+        btPersonalInfoEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("position",position);
+                bundle.putParcelableArrayList("tenant",tenantArrayList);
+                bundle.putBoolean("edit",true);
+
+                System.out.println("position"+position);
+
+                Fragment fr = new AddNewTenantFragment();
+                FragmentManager fm = getFragmentManager();
+                fr.setArguments(bundle);
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fr);
+                fragmentTransaction.commit();
+            }
+        });
 
         btClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,4 +113,5 @@ public class TenantDetailsFragment extends Fragment {
 
         return view;
     }
+
 }

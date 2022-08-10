@@ -37,6 +37,7 @@ public class TenantPaymentFragment extends Fragment {
     EditText etTenantName, etPropertyName,etPaymentDate,etProfession, etDepositPaid,etRentalFeePaid, etDamagePayment;
     Button btPaymentSave, btClose;
     DatePickerDialog datePicker;
+    int totalPaidRent;
 
     private ArrayList<NewPayment> tenantArrayList = new ArrayList<NewPayment>();
     NewPayment newPaymentObj;
@@ -100,7 +101,7 @@ public class TenantPaymentFragment extends Fragment {
                 etPropertyName.getText().toString(),
                 etPaymentDate.getText().toString(),
                 etProfession.getText().toString(),
-                etRentalFeePaid.getText().toString(),
+                String.valueOf(totalPaidRent),
                 etDamagePayment.getText().toString());
 
 

@@ -81,7 +81,9 @@ public class TenantsInformationFragment extends Fragment {
             tenantArrayList = bundle.getParcelableArrayList("tenant");
 
 
+
         }
+
 
 
 
