@@ -26,7 +26,7 @@
     <string name="monthly_payment_for">Monthly Payment for</string>
     <string name="tenant_name">Tenant Name</string>
     <string name="date">Date</string>
-    <string name="rent_paid">Rent Paid</string>
+    <string name="rent_paid">Rent Paid($)</string>
 
     <!--Add a New Tenant-->
     <string name="add_a_new_tenant">Add a New Tenant</string>

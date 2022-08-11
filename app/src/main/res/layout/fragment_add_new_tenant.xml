@@ -54,6 +54,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:padding="8dp"
+            android:singleLine="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edittext"
             app:layout_constraintTop_toBottomOf="@+id/tv_passport_no"
@@ -77,6 +78,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:padding="8dp"
+            android:singleLine="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edittext"
             app:layout_constraintTop_toBottomOf="@+id/tv_full_name"
@@ -114,30 +116,13 @@
                     android:layout_marginLeft="35dp"
                     android:layout_marginRight="15dp"
                     android:padding="8dp"
+                    android:singleLine="true"
                     android:layout_marginTop="10dp"
                     android:drawableRight="@drawable/calender"
                     android:background="@drawable/rounded_edittext"
                     app:layout_constraintTop_toBottomOf="@+id/tv_move_in"
                     app:layout_constraintLeft_toLeftOf="parent"></EditText>
 
-<!--                <Button-->
-<!--                    android:id="@+id/bt_check_in_calender"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="30dp"-->
-<!--                    android:layout_marginRight="30dp"-->
-<!--                    android:text="@string/move_in"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/et_move_in"></Button>-->
-
-
-<!--                <DatePicker-->
-<!--                    android:id="@+id/dp_check_in_calender"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:datePickerMode="spinner"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    android:calendarViewShown="false"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"></DatePicker>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -172,29 +157,12 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="35dp"
                         android:padding="8dp"
+                        android:singleLine="true"
                         android:layout_marginTop="10dp"
                         android:drawableRight="@drawable/calender"
                         android:background="@drawable/rounded_edittext"
                         app:layout_constraintTop_toBottomOf="@+id/tv_move_out"
                         app:layout_constraintLeft_toLeftOf="parent"></EditText>
-
-<!--                    <Button-->
-<!--                        android:id="@+id/bt_check_out_calender"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="30dp"-->
-<!--                        android:layout_marginRight="30dp"-->
-<!--                        android:text="@string/move_in"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/et_move_out"></Button>-->
-
-<!--                    <DatePicker-->
-<!--                        android:id="@+id/dp_calender"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:datePickerMode="spinner"-->
-<!--                        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                        android:calendarViewShown="false"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"></DatePicker>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -254,6 +222,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:padding="8dp"
+            android:singleLine="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edittext"
             app:layout_constraintTop_toBottomOf="@+id/tv_profession"
@@ -278,6 +247,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:padding="8dp"
+            android:singleLine="true"
             android:inputType="phone"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edittext"
@@ -303,6 +273,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:padding="8dp"
+            android:singleLine="true"
             android:inputType="numberDecimal"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edittext"
@@ -320,37 +291,6 @@
             app:layout_constraintTop_toBottomOf="@+id/et_deposit_paid">
 
         </CheckBox>
-
-<!--    <RadioGroup-->
-<!--        android:id="@+id/rg_sign"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/et_tv_deposit_paid"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
-<!--            <RadioButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/yes"-->
-<!--                android:padding="25dp">-->
-
-
-<!--            </RadioButton>-->
-
-<!--            <RadioButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/no"-->
-<!--                android:padding="25dp">-->
-<!--            </RadioButton>-->
-<!--        </LinearLayout>-->
-
-<!--    </RadioGroup>-->
 
 
         <Button

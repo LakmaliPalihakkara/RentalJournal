@@ -14,15 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"></TextView>
 
     <Button
         android:id="@+id/bt_delete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAllCaps="false"
         android:textSize="10dp"
         android:background="@drawable/delete"

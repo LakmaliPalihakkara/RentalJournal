@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
         //    tenantArrayList = bundle.getParcelableArrayList("tenant");// Key
             name = bundle.getString("name");
 
-            tvHi.setText("Hi "+ name);
+            tvHi.setText("Hello "+ name);
 
 
 

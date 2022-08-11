@@ -83,6 +83,7 @@ public class TenantDetailsFragment extends Fragment {
                 bundle.putInt("position",position);
                 bundle.putParcelableArrayList("tenant",tenantArrayList);
                 bundle.putBoolean("edit",true);
+                bundle.putString("name",name);
 
                 System.out.println("position"+position);
 

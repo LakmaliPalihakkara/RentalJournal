@@ -185,7 +185,6 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
             String json = gson.toJson(mData);
             editor.putString("newTenant", json);
             editor.apply();
-            Toast.makeText(context, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
         }
     }
 }
