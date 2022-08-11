@@ -51,10 +51,6 @@ public class TenantDetailsFragment extends Fragment {
         tvMoveInValue = (TextView) view.findViewById(R.id.tv_move_in_value);
         tvMoveOutValue = (TextView) view.findViewById(R.id.tv_move_out_value);
         tvTotalRentalFeePaidValue = (TextView) view.findViewById(R.id.tv_total_rental_fee_paid_value);
-//        tvDepositIncludedValue = (TextView) view.findViewById(R.id.tv_deposit_included_value);
-//        tvRemainingRentalFeeValue = (TextView) view.findViewById(R.id.tv_remaining_rental_fee_value);
-//        tvRemainingDamagePaymentValue = (TextView) view.findViewById(R.id.tv_remaining_damage_payment_value);
-//        tvOutstandingBalanceValue = (TextView) view.findViewById(R.id.tv_outstanding_balance);
 
         btPersonalInfoEdit = (Button) view.findViewById(R.id.bt_personal_info_edit);
         btClose = (Button) view.findViewById(R.id.bt_close);
@@ -76,10 +72,6 @@ public class TenantDetailsFragment extends Fragment {
                     tvMoveInValue.setText(tenantArrayList.get(i).getCheckInDate());
                     tvMoveOutValue.setText(tenantArrayList.get(i).getCheckOutDate());
                     tvTotalRentalFeePaidValue.setText(tenantArrayList.get(i).getDepositPaid());
-                //    tvDepositIncludedValue.setText(tenantArrayList.get(i).getDepositPaid());
-                    // tvRemainingRentalFeeValue.setText(tenantArrayList.get(i).getFullName());
-                    // tvRemainingDamagePaymentValue.setText(tenantArrayList.get(i).getFullName());
-                    //tvOutstandingBalanceValue.setText(tenantArrayList.get(i).getFullName());
                 }
             }
         }

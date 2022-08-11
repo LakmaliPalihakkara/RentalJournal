@@ -66,13 +66,7 @@ public class AddNewTenantAdapter extends RecyclerView.Adapter<AddNewTenantAdapte
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
 
-//        String getItem(int id) {
-//            // return mData.get(id);
-//            return mData.get(id);
-//        }
     }
-
-    // convenience method for getting data at click position
 
 
     // allows clicks events to be caught

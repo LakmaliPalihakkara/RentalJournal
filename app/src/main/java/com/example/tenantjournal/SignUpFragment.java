@@ -35,9 +35,6 @@ public class SignUpFragment extends Fragment {
     Button btSignUp;
     TextView tvLogin;
 
-  //  NewTenant newTenantObj;
- //   private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
-
     public SignUpFragment() {
         // Required empty public constructor
     }
@@ -164,9 +161,6 @@ public class SignUpFragment extends Fragment {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             Gson gson = new Gson();
-//            String json = gson.toJson(landlord);
-//            editor.putString("newTenant", json);
-//            editor.apply();
 
             String json = gson.toJson(landlord);
             editor.putString("newTenant1", json);

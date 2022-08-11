@@ -38,9 +38,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class TenantsInformationFragment extends Fragment {
 
-    private ListView lvSearch;
     private EditText etSearch;
-    private ArrayAdapter<String> searchAdapter;
     Button btClose;
     String name;
 
@@ -63,7 +61,6 @@ public class TenantsInformationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tenants_information, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
-        lvSearch = (ListView) rootView.findViewById(R.id.lv_search);
         etSearch = (EditText) rootView.findViewById(R.id.et_search);
         btClose = (Button) rootView.findViewById(R.id.bt_close);
         svSearch = (SearchView) rootView.findViewById(R.id.sv_search);
@@ -79,33 +76,12 @@ public class TenantsInformationFragment extends Fragment {
 
         final Bundle bundle = getArguments();
         if (bundle != null) {
-            tenantArrayList = bundle.getParcelableArrayList("tenant");
+          //  tenantArrayList = bundle.getParcelableArrayList("tenant");
             name = bundle.getString("name");
 
 
 
         }
-
-
-
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            searchAdapter = new ArrayAdapter<Tenant>(getContext(), R.layout.search_list_item, R.id.textview,tenantArrayList);
-//
-//            lvSearch.setAdapter(searchAdapter);
-//        }
-
-//        for (int i = 0; i < tenantArrayList.size(); i++) {
-//            tenantArrayListName.add(tenantArrayList.get(i).getFullName());
-//        }
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            searchAdapter = new ArrayAdapter<String>(getContext(), R.layout.search_list_item, R.id.textview, tenantArrayListName);
-//
-//            viewOnClick(rootView);
-//
-//            lvSearch.setAdapter(searchAdapter);
-//        }
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -116,7 +92,6 @@ public class TenantsInformationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-              //  searchAdapter.getFilter().filter(s);
                 tenantInformationAdapter.getFilter().filter(s);
 
             }
@@ -151,11 +126,6 @@ public class TenantsInformationFragment extends Fragment {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-
-            //   adapterNames.notifyDataSetChanged();
-
-            //     loadData();
-
             if (tenantArrayList != null) {
 
                 tenantInformationAdapter = new TenantInformationAdapter(getContext(), tenantArrayList, new TenantInformationAdapter.ViewClickListener() {
@@ -177,11 +147,6 @@ public class TenantsInformationFragment extends Fragment {
                     @Override
                     public void onClickDelete(View view, int position, ArrayList<Tenant> arrayList) {
 
-                     //   tenantArrayList.clear();
-                     //   tenantArrayList = arrayList;
-                 //  tenantArrayList.remove(position);
-//                  searchAdapter.notifyItemRemoved(position);
-//                   notifyItemRangeChanged(position,mData.size());
                     }
                 });
 
@@ -195,14 +160,6 @@ public class TenantsInformationFragment extends Fragment {
         }
     }
 
-    public void viewOnClick(View v) {
-        final int position = lvSearch.getPositionForView(v);
-//        String text = lvSearch.getItemAtPosition(position).toString();
-
-        System.out.println("view"+position);
-       // Toast.makeText(getApplicationContext, text, Toast.LENGTH_SHORT).show();
-    }
-
     private void loadData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -214,11 +171,6 @@ public class TenantsInformationFragment extends Fragment {
 
 
             }
-
-
-//            if (tenantArrayList == null) {
-//                tenantArrayList = new ArrayList<>();
-//            }
         }
     }
 

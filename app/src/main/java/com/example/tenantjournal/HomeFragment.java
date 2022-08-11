@@ -46,13 +46,9 @@ public class HomeFragment extends Fragment {
 
     AddNewTenantAdapter addNewTenantAdapter;
     RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager;
     Button btNewTenant, btViewTenant, btTenantPayment, btLogOut;
     TextView tvHi, tvCurrentMonth;
     String name;
-    //ListView arrayList;
-//    Tenant tenant;
-//    ArrayAdapter<Tenant> adapterNames;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,7 +64,6 @@ public class HomeFragment extends Fragment {
         tvHi = (TextView) rootView.findViewById(R.id.tv_hi);
         tvCurrentMonth = (TextView) rootView.findViewById(R.id.tv_current_month);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_rent);
-     //   arrayList = (ListView) rootView.findViewById(R.id.lv_tenant);
         btNewTenant = (Button) rootView.findViewById(R.id.bt_new_tenant);
         btViewTenant = (Button) rootView.findViewById(R.id.bt_view_tenant);
         btTenantPayment = (Button) rootView.findViewById(R.id.bt_tenant_payment);
@@ -98,24 +93,6 @@ public class HomeFragment extends Fragment {
 
 
 
-                 //   tenantArrayList.add(tenant);
-                  //  saveData(tenantArrayList);
-
-
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//                adapterNames = new ArrayAdapter<Tenant>(getContext(),android.R.layout.simple_list_item_1, android.R.id.text1, tenantArrayList);
-//
-//
-//                tenantArrayList.add(0,tenant);
-//                adapterNames.notifyDataSetChanged();
-//
-//                arrayList.setAdapter(adapterNames);
-//            }
-
-         //   loadData();
-
-
-
         }
 
         Calendar cal = Calendar.getInstance();
@@ -131,7 +108,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-               // callFragment(new AddNewTenantFragment());
 
                 Bundle bundle1 = new Bundle();
                 bundle1.putParcelableArrayList("tenant", tenantArrayList);
@@ -207,11 +183,6 @@ public class HomeFragment extends Fragment {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-
-            //   adapterNames.notifyDataSetChanged();
-
-            //     loadData();
-
             if (paymentArrayList != null) {
 
                 addNewTenantAdapter = new AddNewTenantAdapter(getContext(), paymentArrayList);
@@ -249,7 +220,6 @@ public class HomeFragment extends Fragment {
 
 
             tenantArrayList = gson.fromJson(json, type);
-          //  saveData(paymentArrayList);
 
         }
     }

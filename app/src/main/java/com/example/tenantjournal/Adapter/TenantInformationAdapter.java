@@ -29,7 +29,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInformationAdapter.ViewHolder> implements Filterable {
     private ArrayList<Tenant> mData;
-    // private ArrayList<ItemDataModel> dataSet;
     private ArrayList<Tenant> FullList;
 
     private LayoutInflater mInflater;
@@ -132,14 +131,7 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
             //if (viewClickListener != null) viewClickListener.onClickView(view, getAdapterPosition());
 
         }
-
-//        String getItem(int id) {
-//            // return mData.get(id);
-//            return mData.get(id);
-//        }
     }
-
-    // convenience method for getting data at click position
 
 
     // allows clicks events to be caught
@@ -194,21 +186,6 @@ public class TenantInformationAdapter extends RecyclerView.Adapter<TenantInforma
             editor.putString("newTenant", json);
             editor.apply();
             Toast.makeText(context, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void loadData() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("shared preferences", MODE_PRIVATE);
-            Gson gson = new Gson();
-            String json = sharedPreferences.getString("newPayment", null);
-            Type type = new TypeToken<ArrayList<NewPayment>>() {
-            }.getType();
-
-
-          //  paymentArrayList = gson.fromJson(json, type);
-          //  saveData(paymentArrayList);
-
         }
     }
 }

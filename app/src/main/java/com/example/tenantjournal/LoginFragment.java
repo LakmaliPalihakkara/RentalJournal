@@ -36,12 +36,7 @@ public class LoginFragment extends Fragment {
     EditText etUsername, etPassword;
     Button btLogin;
     TextView tvSignUp;
-
-    String username, email, password;
     Landlord landlord;
-
- //   NewTenant newTenant;
- //   private ArrayList<Landlord> newTenantArrayList = new ArrayList<>();
 
     public LoginFragment() {
         // Required empty public constructor
@@ -85,63 +80,47 @@ public class LoginFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
             Gson gson = new Gson();
-//            String json = sharedPreferences.getString("newTenant", null);
-//            Type type = new TypeToken<Landlord>() {
-//            }.getType();
-           // newTenantArrayList = gson.fromJson(json, type);
             String json = sharedPreferences.getString("newTenant1", "");
             landlord = gson.fromJson(json, Landlord.class);
 
-            if(landlord != null) {
-           //     for (int i = 0; i < newTenantArrayList.size(); i++) {
-                    //   username = newTenantArrayList.get(i).getUsername();
-                    //    email = newTenantArrayList.get(i).getEmail();
-                    //     password = newTenantArrayList.get(i).getPassword();
+            if (landlord != null) {
 
+                if (etUsername.getText().toString().equals("")) {
 
-                    if (etUsername.getText().toString().equals("")) {
+                    etUsername.setHint("Please enter your username");
+                    etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
 
-                        etUsername.setHint("Please enter your username");
-                        etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (etPassword.getText().toString().equals("")) {
+                    etPassword.setHint("Please enter your password");
+                    etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if ((!etUsername.getText().toString().equals(landlord.getUsername())) || (!etUsername.getText().toString().equals(landlord.getUsername()))) {
+                    etUsername.setText("");
 
-                    } else if (etPassword.getText().toString().equals("")) {
-                        etPassword.setHint("Please enter your password");
-                        etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
-                    } else if ((!etUsername.getText().toString().equals(landlord.getUsername())) || (!etUsername.getText().toString().equals(landlord.getUsername()))) {
-                        etUsername.setText("");
+                    etUsername.setHint("Incorrect username or email");
+                    etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
 
-                        etUsername.setHint("Incorrect username or email");
-                        etUsername.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else if (!etPassword.getText().toString().equals(landlord.getPassword())) {
+                    etPassword.setText("");
 
-                    } else if (!etPassword.getText().toString().equals(landlord.getPassword())) {
-                        etPassword.setText("");
+                    etPassword.setHint("Incorrect password");
+                    etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", landlord.getUsername());
+                    Fragment fr = new HomeFragment();
+                    FragmentManager fm = getFragmentManager();
+                    fr.setArguments(bundle);
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.replace(R.id.container, fr);
+                    fragmentTransaction.commit();
+                }
 
-                        etPassword.setHint("Incorrect password");
-                        etPassword.setHintTextColor(getResources().getColor(R.color.colorRed));
-                    } else {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",landlord.getUsername());
-                        Fragment fr = new HomeFragment();
-                        FragmentManager fm = getFragmentManager();
-                        fr.setArguments(bundle);
-                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.container, fr);
-                        fragmentTransaction.commit();
-                    }
+                System.out.println(landlord.getUsername());
 
-                    System.out.println(landlord.getUsername());
-
-            //    }
-            }
-            else{
+            } else {
                 Toast.makeText(getContext(), "User not available", Toast.LENGTH_SHORT).show();
 
             }
-
-
-//            if (tenantArrayList == null) {
-//                tenantArrayList = new ArrayList<>();
-//            }
         }
     }
 
